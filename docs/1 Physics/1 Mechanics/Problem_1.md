@@ -23,7 +23,7 @@ Investigate the relationship between the range and the angle of projection \( \t
 
 Below is the graph showing the relationship between the range and the angle of projection:
 
-![Range vs Angle of Projection](../images/range_vs_angle.png)
+![Range vs Angle of Projection](./images/range_vs_angle.png)
 
 ### Influence of Other Parameters
 Analyze how changes in \( v_0 \) and \( g \) modify the range.
