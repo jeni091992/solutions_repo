@@ -19,6 +19,12 @@ Discuss how variations in initial velocity \( v_0 \), gravitational acceleration
 ### Dependence on Angle of Projection
 Investigate the relationship between the range and the angle of projection \( \theta \). Include a graph showing \( R \) vs. \( \theta \).
 
+### Graphical Representation
+
+Below is the graph showing the relationship between the range and the angle of projection:
+
+![Range vs Angle of Projection](../images/range_vs_angle.png)
+
 ### Influence of Other Parameters
 Analyze how changes in \( v_0 \) and \( g \) modify the range.
 
