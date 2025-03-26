@@ -1,5 +1,5 @@
 ### **1. Theoretical Foundation**
-#### **Governing Equations**
+### **Governing Equations**
 The motion of a projectile under gravity (without air resistance) is governed by Newton’s Second Law:
 
 \[
@@ -23,7 +23,7 @@ where:
 - \( \theta \) is the launch angle,
 - \( g \) is the gravitational acceleration.
 
-#### **Finding the Range**
+### **Finding the Range**
 The range \( R \) is found by solving for \( x \) when \( y = 0 \) (projectile returns to ground):
 
 \[
