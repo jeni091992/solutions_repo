@@ -1,4 +1,8 @@
-# Problem 2
+## Problem 2
+
+### Investigating the Dynamics of a Forced Damped Pendulum
+
+---
 
 ## 🧠 **General Solutions for the Forced Damped Pendulum**
 

@@ -1,3 +1,9 @@
+## Problem 1
+
+### Investigating the Range as a Function of the Angle of Projection
+
+---
+
 ### **1. Theoretical Foundation**
 ### **Governing Equations**
 The motion of a projectile under gravity (without air resistance) is governed by Newton’s Second Law:
