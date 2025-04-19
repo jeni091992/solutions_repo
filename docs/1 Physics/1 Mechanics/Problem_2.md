@@ -1,140 +1,125 @@
 # Problem 2
 
-# Investigating the Dynamics of a Forced Damped Pendulum
+## 🧠 **General Solutions for the Forced Damped Pendulum**
 
-## 🎯 Motivation
+### **1. Full Nonlinear Equation**
 
-The forced damped pendulum is a captivating example of nonlinear dynamics, where damping, restoring forces, and periodic driving interact to create complex behaviors—from periodic motion to chaos. It models real-world systems like mechanical oscillators, climate cycles, and electric circuits.
+The forced damped pendulum is governed by the second-order nonlinear ODE:
+
+\[
+\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L}\sin(\theta) = A\cos(\omega_d t)
+\]
+
+This is **nonlinear**, **non-autonomous**, and **second-order**, with:
+- **Damping**: \( b\frac{d\theta}{dt} \)
+- **Restoring force**: \( \frac{g}{L} \sin(\theta) \)
+- **External driving**: \( A\cos(\omega_d t) \)
+
+❗**General solutions to this equation cannot be written in closed form.** Numerical techniques are necessary.
 
 ---
 
-## 🧠 Theoretical Foundation
+### **2. Linearized Case (Small-Angle Approximation)**
 
-### Governing Equation:
+For small oscillations \( \theta \ll 1 \), we use:
 
 \[
-\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega_d t)
+\sin(\theta) \approx \theta
 \]
 
-- \( \theta(t) \): angular displacement
-- \( b \): damping coefficient
-- \( A \): amplitude of driving force
-- \( \omega_d \): driving frequency
-- \( g \): acceleration due to gravity
-- \( L \): length of pendulum
-
-### Small-Angle Approximation:
-
-For small \( \theta \), \( \sin(\theta) \approx \theta \). The equation becomes:
+Then the equation becomes:
 
 \[
-\theta'' + b \theta' + \frac{g}{L} \theta = A \cos(\omega_d t)
+\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{L} \theta = A\cos(\omega_d t)
 \]
 
-This describes a driven damped harmonic oscillator with resonance near:
+This is a **linear inhomogeneous second-order ODE**, with the general solution:
 
 \[
-\omega_d \approx \sqrt{\frac{g}{L}}
+\theta(t) = \theta_h(t) + \theta_p(t)
+\]
+
+#### 🔹 Homogeneous Solution (\( \theta_h \)):
+
+\[
+\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \omega_0^2 \theta = 0
+\quad\text{where } \omega_0 = \sqrt{\frac{g}{L}}
+\]
+
+Solving this gives:
+
+- **Underdamped**: \( b^2 < 4\omega_0^2 \)
+
+\[
+\theta_h(t) = e^{-\frac{b}{2}t}(C_1\cos(\omega_1 t) + C_2\sin(\omega_1 t)) \quad \text{where } \omega_1 = \sqrt{\omega_0^2 - \left(\frac{b}{2}\right)^2}
+\]
+
+- **Critically damped**: \( b^2 = 4\omega_0^2 \)
+- **Overdamped**: \( b^2 > 4\omega_0^2 \)
+
+Each case leads to exponential decay of oscillations.
+
+#### 🔹 Particular Solution (\( \theta_p \)):
+
+We seek a steady-state solution of the form:
+
+\[
+\theta_p(t) = B\cos(\omega_d t - \delta)
+\]
+
+Where:
+- \( B \): amplitude of response
+- \( \delta \): phase shift between driving force and response
+
+Substitute into the linearized equation to get:
+
+\[
+B = \frac{A}{\sqrt{(\omega_0^2 - \omega_d^2)^2 + b^2\omega_d^2}} \\
+\delta = \tan^{-1}\left( \frac{b\omega_d}{\omega_0^2 - \omega_d^2} \right)
 \]
 
 ---
 
-## 🔬 Analysis of Dynamics
+### **3. Resonance Behavior**
 
-By varying parameters, we explore the system’s rich behavior:
+- Resonance occurs when the driving frequency \( \omega_d \) is near the natural frequency \( \omega_0 \)
+- The system’s response peaks when:
 
-- **Damping \(b\)**: controls energy loss rate
-- **Amplitude \(A\)**: influences transition to chaos
-- **Frequency \( \omega_d \)**: resonance & quasi-periodicity
+\[
+\omega_{\text{res}} = \sqrt{\omega_0^2 - \frac{b^2}{2}}
+\]
+
+The amplitude increases dramatically unless damping \( b \) is large.
 
 ---
 
-## 🧪 Python Simulation Code
+### **4. Numerical and Chaotic Solutions (Full Nonlinear Case)**
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp
+For larger amplitudes, the small-angle approximation breaks down, and **nonlinear effects dominate**, especially when:
+- \( A \) is large (strong driving)
+- \( b \) is small (weak damping)
 
-# Physical parameters
-g = 9.81
-L = 1.0
+#### 🌪 Chaos Emerges When:
+- There's sensitive dependence on initial conditions
+- The system exhibits non-periodic, bounded trajectories
+- Phase space trajectories fill a region instead of forming closed loops
 
-# Differential equation
-def pendulum(t, y, b, A, omega_d):
-    theta, omega = y
-    dydt = [omega, -b * omega - (g / L) * np.sin(theta) + A * np.cos(omega_d * t)]
-    return dydt
+These must be analyzed using:
+- **Numerical Integration** (e.g., Runge-Kutta)
+- **Poincaré Maps**
+- **Lyapunov Exponents**
+- **Bifurcation Diagrams**
 
-# Solver
-def solve_pendulum(b, A, omega_d, y0, t_span=(0, 100), points=10000):
-    t_eval = np.linspace(*t_span, points)
-    sol = solve_ivp(pendulum, t_span, y0, t_eval=t_eval, method='RK45', args=(b, A, omega_d))
-    return sol
+---
 
-# Plot functions
-def plot_time_series(sol):
-    plt.figure(figsize=(10, 4))
-    plt.plot(sol.t, sol.y[0])
-    plt.title('Angle vs Time')
-    plt.xlabel('Time [s]')
-    plt.ylabel('Angle [rad]')
-    plt.grid(True)
-    plt.show()
+### **5. Summary of Behavior by Regime**
 
-def plot_phase_portrait(sol):
-    plt.figure(figsize=(6, 6))
-    plt.plot(sol.y[0], sol.y[1], lw=0.5)
-    plt.title('Phase Portrait')
-    plt.xlabel('Angle [rad]')
-    plt.ylabel('Angular Velocity [rad/s]')
-    plt.grid(True)
-    plt.show()
+| Regime                   | Behavior                      | Solution Type                   |
+|--------------------------|-------------------------------|----------------------------------|
+| Small-angle, no drive    | Simple Harmonic Motion        | Analytic                         |
+| Small-angle, with drive  | Linear resonance               | Analytic (steady-state + decay) |
+| Full equation, weak drive| Quasiperiodic or periodic     | Numerical                        |
+| Full equation, strong drive| Chaotic                     | Numerical                        |
 
-def plot_poincare_section(sol, omega_d):
-    T_drive = 2 * np.pi / omega_d
-    sample_times = np.arange(0, sol.t[-1], T_drive)
-    sampled_indices = np.searchsorted(sol.t, sample_times)
-    sampled_theta = sol.y[0][sampled_indices % len(sol.y[0])]
-    sampled_omega = sol.y[1][sampled_indices % len(sol.y[1])]
-    plt.figure(figsize=(6, 6))
-    plt.plot(sampled_theta, sampled_omega, 'o', markersize=2)
-    plt.title('Poincare Section')
-    plt.xlabel('Angle [rad]')
-    plt.ylabel('Angular Velocity [rad/s]')
-    plt.grid(True)
-    plt.show()
+---
 
-def plot_bifurcation(y0, b, omega_d, A_range, sample_point=-100):
-    theta_vals = []
-    A_vals = []
-    for A in A_range:
-        sol = solve_pendulum(b, A, omega_d, y0)
-        T_drive = 2 * np.pi / omega_d
-        sample_times = np.arange(0, sol.t[-1], T_drive)
-        sampled_indices = np.searchsorted(sol.t, sample_times)
-        sampled_theta = sol.y[0][sampled_indices[sample_point:]]
-        theta_vals.extend(sampled_theta)
-        A_vals.extend([A] * len(sampled_theta))
-    plt.figure(figsize=(10, 6))
-    plt.plot(A_vals, theta_vals, 'k.', markersize=0.5)
-    plt.title('Bifurcation Diagram')
-    plt.xlabel('Driving Amplitude A')
-    plt.ylabel('Angle [rad]')
-    plt.grid(True)
-    plt.show()
-
-# Run example
-b = 0.5
-A = 1.2
-omega_d = 2.0
-y0 = [0.1, 0.0]
-
-sol = solve_pendulum(b, A, omega_d, y0)
-plot_time_series(sol)
-plot_phase_portrait(sol)
-plot_poincare_section(sol, omega_d)
-
-# Bifurcation diagram
-A_values = np.linspace(0.5, 1.5, 500)
-plot_bifurcation(y0, b, omega_d, A_values)
