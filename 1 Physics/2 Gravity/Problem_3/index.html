@@ -176,6 +176,97 @@
 <h2 id="problem-3">Problem 3</h2>
 <h3 id="trajectories-of-a-freely-released-payload-near-earth">Trajectories of a Freely Released Payload Near Earth</h3>
 <hr/>
+<h2 id="task-1-analyze-the-possible-trajectories-of-a-payload-released-near-earth">Task 1: Analyze the Possible Trajectories of a Payload Released Near Earth</h2>
+<p>When a payload is released from a rocket near Earth, its trajectory depends primarily on its <strong>initial velocity vector</strong> and <strong>position relative to Earth’s center</strong>. These trajectories can be classified according to the <strong>total mechanical energy (E)</strong> of the system and the <strong>shape of the resulting path</strong>, which corresponds to a conic section.</p>
+<h3 id="1-elliptical-trajectory">1. Elliptical Trajectory</h3>
+<ul>
+<li><strong>Condition</strong>: Total energy <span class="arithmatex">\( E &lt; 0 \)</span></li>
+<li><strong>Speed</strong>: Less than escape velocity <span class="arithmatex">\( v &lt; v_{esc} \)</span></li>
+<li><strong>Shape</strong>: Ellipse</li>
+<li><strong>Nature</strong>: Bound orbit</li>
+<li><strong>Examples</strong>:</li>
+<li>Satellites in low Earth orbit (LEO), medium Earth orbit (MEO), or geostationary orbit (GEO)</li>
+<li><strong>Equation</strong>:
+  [
+  \text{Semi-major axis: } a = -\frac{GM}{2E/m}
+  ]</li>
+</ul>
+<h3 id="2-parabolic-trajectory">2. Parabolic Trajectory</h3>
+<ul>
+<li><strong>Condition</strong>: Total energy <span class="arithmatex">\( E = 0 \)</span></li>
+<li><strong>Speed</strong>: Exactly escape velocity <span class="arithmatex">\( v = v_{esc} \)</span></li>
+<li><strong>Shape</strong>: Parabola</li>
+<li><strong>Nature</strong>: Marginal escape</li>
+<li><strong>Examples</strong>:</li>
+<li>Hypothetical perfect escape path with no residual velocity at infinity</li>
+<li><strong>Key Feature</strong>: Separates bound and unbound motion; transitional trajectory.</li>
+</ul>
+<h3 id="3-hyperbolic-trajectory">3. Hyperbolic Trajectory</h3>
+<ul>
+<li><strong>Condition</strong>: Total energy <span class="arithmatex">\( E &gt; 0 \)</span></li>
+<li><strong>Speed</strong>: Greater than escape velocity <span class="arithmatex">\( v &gt; v_{esc} \)</span></li>
+<li><strong>Shape</strong>: Hyperbola</li>
+<li><strong>Nature</strong>: Unbound escape</li>
+<li><strong>Examples</strong>:</li>
+<li>Interplanetary probes like Voyager or New Horizons</li>
+<li><strong>Characteristic</strong>: Payload escapes Earth's gravity with residual speed.</li>
+</ul>
+<h3 id="4-suborbital-ballistic-trajectory-non-conic-but-relevant">4. Suborbital (Ballistic) Trajectory <em>(Non-conic but relevant)</em></h3>
+<ul>
+<li><strong>Condition</strong>: Initial velocity too low for orbit</li>
+<li><strong>Speed</strong>: <span class="arithmatex">\( v &lt; v_{orb} \)</span></li>
+<li><strong>Shape</strong>: Segment of an ellipse that intersects Earth</li>
+<li><strong>Nature</strong>: Returns to Earth</li>
+<li><strong>Examples</strong>:</li>
+<li>Reentry vehicles, sounding rockets</li>
+<li><strong>Key Feature</strong>: The payload follows a curved path but lacks sufficient speed to remain in orbit.</li>
+</ul>
+<hr/>
+<h3 id="summary-table">Summary Table</h3>
+<table>
+<thead>
+<tr>
+<th>Trajectory Type</th>
+<th>Energy <span class="arithmatex">\(E\)</span></th>
+<th>Speed Condition</th>
+<th>Nature</th>
+<th>Shape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elliptical</td>
+<td><span class="arithmatex">\(E &lt; 0\)</span></td>
+<td><span class="arithmatex">\(v &lt; v_{esc}\)</span></td>
+<td>Bound</td>
+<td>Ellipse</td>
+</tr>
+<tr>
+<td>Parabolic</td>
+<td><span class="arithmatex">\(E = 0\)</span></td>
+<td><span class="arithmatex">\(v = v_{esc}\)</span></td>
+<td>Marginal</td>
+<td>Parabola</td>
+</tr>
+<tr>
+<td>Hyperbolic</td>
+<td><span class="arithmatex">\(E &gt; 0\)</span></td>
+<td><span class="arithmatex">\(v &gt; v_{esc}\)</span></td>
+<td>Unbound</td>
+<td>Hyperbola</td>
+</tr>
+<tr>
+<td>Suborbital</td>
+<td><span class="arithmatex">\(E &lt; 0\)</span></td>
+<td><span class="arithmatex">\(v &lt; v_{orb}\)</span></td>
+<td>Bound</td>
+<td>Arc/ellipse</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h3 id="visualizing-trajectories-near-earth">Visualizing Trajectories Near Earth</h3>
+<p><img alt="Payload Trajectories Near Earth" src="../images/payload_trajectories_near_earth.png"/></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
