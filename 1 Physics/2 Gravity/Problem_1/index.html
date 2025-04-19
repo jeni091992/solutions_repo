@@ -56,6 +56,20 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#1-derivation-of-the-relationship">1. Derivation of the Relationship</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-implications-for-astronomy">2. Implications for Astronomy</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-real-world-examples">3. Real-World Examples</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#example-1-moons-orbit-around-earth">Example 1: Moon’s Orbit Around Earth</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#example-2-earths-orbit-around-the-sun">Example 2: Earth's Orbit Around the Sun</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-computational-model-output">4. Computational Model Output</a>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
@@ -172,6 +186,82 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h3 id="1-derivation-of-the-relationship">1. Derivation of the Relationship</h3>
+<p>We start with Newton’s Law of Gravitation and the formula for centripetal force.</p>
+<ul>
+<li>
+<p><strong>Gravitational Force:</strong><br/>
+  [
+  F_g = \frac{G M m}{r^2}
+  ]</p>
+</li>
+<li>
+<p><strong>Centripetal Force:</strong><br/>
+  [
+  F_c = \frac{m v^2}{r}
+  ]</p>
+</li>
+</ul>
+<p>Equating the two forces for a body in circular orbit:</p>
+<div class="arithmatex">\[
+\frac{G M m}{r^2} = \frac{m v^2}{r}
+\]</div>
+<p>Canceling <span class="arithmatex">\( m \)</span> and solving for <span class="arithmatex">\( v \)</span>:</p>
+<div class="arithmatex">\[
+v^2 = \frac{G M}{r}
+\]</div>
+<p>The orbital period <span class="arithmatex">\( T \)</span> is related to the velocity and orbital radius by:</p>
+<div class="arithmatex">\[
+v = \frac{2\pi r}{T}
+\]</div>
+<p>Substitute into the velocity equation:</p>
+<div class="arithmatex">\[
+\left( \frac{2\pi r}{T} \right)^2 = \frac{G M}{r}
+\]</div>
+<div class="arithmatex">\[
+\frac{4\pi^2 r^2}{T^2} = \frac{G M}{r}
+\]</div>
+<p>Solving for <span class="arithmatex">\( T^2 \)</span>:</p>
+<div class="arithmatex">\[
+T^2 = \frac{4\pi^2}{G M} r^3
+\]</div>
+<p>✅ <strong>This shows</strong> that <span class="arithmatex">\( T^2 \propto r^3 \)</span>, which is <strong>Kepler’s Third Law</strong> for circular orbits.</p>
+<hr/>
+<h3 id="2-implications-for-astronomy">2. Implications for Astronomy</h3>
+<ul>
+<li>This relationship allows astronomers to:</li>
+<li>Determine the <strong>mass of a central body</strong> (e.g., a star or planet) by observing the motion of orbiting objects.</li>
+<li>Calculate <strong>orbital distances</strong> when the period is known.</li>
+<li>Model the structure and scale of planetary systems.</li>
+<li>It supports the understanding of <strong>exoplanetary systems</strong> by enabling inference of planetary positions and masses from light curves and Doppler shifts.</li>
+<li>It's essential in <strong>satellite design</strong> and <strong>space mission planning</strong>, ensuring correct orbital parameters for stable orbits.</li>
+</ul>
+<hr/>
+<h3 id="3-real-world-examples">3. Real-World Examples</h3>
+<h4 id="example-1-moons-orbit-around-earth">Example 1: Moon’s Orbit Around Earth</h4>
+<ul>
+<li>Mean radius <span class="arithmatex">\( r = 3.84 \times 10^8 \, \text{m} \)</span></li>
+<li>Orbital period <span class="arithmatex">\( T = 27.3 \, \text{days} = 2.36 \times 10^6 \, \text{s} \)</span></li>
+</ul>
+<p>Calculate <span class="arithmatex">\( \frac{T^2}{r^3} \)</span>:</p>
+<div class="arithmatex">\[
+\frac{(2.36 \times 10^6)^2}{(3.84 \times 10^8)^3} \approx 4.95 \times 10^{-14} \, \text{s}^2/\text{m}^3
+\]</div>
+<h4 id="example-2-earths-orbit-around-the-sun">Example 2: Earth's Orbit Around the Sun</h4>
+<ul>
+<li>Radius <span class="arithmatex">\( r = 1.496 \times 10^{11} \, \text{m} \)</span></li>
+<li>Period <span class="arithmatex">\( T = 365.25 \, \text{days} = 3.156 \times 10^7 \, \text{s} \)</span></li>
+</ul>
+<div class="arithmatex">\[
+\frac{(3.156 \times 10^7)^2}{(1.496 \times 10^{11})^3} \approx 2.97 \times 10^{-19} \, \text{s}^2/\text{m}^3
+\]</div>
+<p>These values align with Kepler’s Law and confirm its consistency across vastly different systems.</p>
+<hr/>
+<h3 id="4-computational-model-output">4. Computational Model Output</h3>
+<p>📷 <strong>Kepler's Third Law: Simulation Plot</strong></p>
+<p><img alt="Kepler's Law Plot" src="../images/keplers_law_plot.png"/></p>
+<p>✅ This simulation confirms a linear relationship between <span class="arithmatex">\( T^2 \)</span> and <span class="arithmatex">\( r^3 \)</span>, visually validating Kepler’s Third Law.</p>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
