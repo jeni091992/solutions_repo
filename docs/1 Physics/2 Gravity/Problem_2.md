@@ -60,8 +60,8 @@ This is the **escape velocity (second cosmic velocity)**.
 | Jupiter  | 69,911      | 1.898 × 10²⁷     | 42.1      | 59.5      |
 
 > **Note:**  
-> First cosmic velocity \( v_1 = \sqrt{G M / R} \)  
-> Second cosmic velocity \( v_2 = \sqrt{2 G M / R} \)
+> First cosmic velocity \( v_1 = \sqrt{\frac{G M}{R}} \)  
+> Second cosmic velocity \( v_2 = \sqrt{\frac{2 G M}{R}} \)
 
 ---
 
