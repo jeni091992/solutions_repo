@@ -66,6 +66,28 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations-and-potential-extensions">🧩 Limitations and Potential Extensions</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#limitations-of-the-model">🔻 Limitations of the Model</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#possible-extensions">🌱 Possible Extensions</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#phase-portraits-poincare-sections-and-bifurcation-diagrams">📊 Phase Portraits, Poincaré Sections, and Bifurcation Diagrams</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#phase-portraits">🔹 Phase Portraits</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#poincare-sections">🔹 Poincaré Sections</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#bifurcation-diagrams">🔹 Bifurcation Diagrams</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#example-implementation-and-visualization">Example Implementation and Visualization</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#conclusion">📝 Conclusion</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -306,6 +328,91 @@ B = \frac{A}{\sqrt{(\omega_0^2 - \omega_d^2)^2 + b^2\omega_d^2}} \\
 <h3 id="graphical-representations-of-motion">Graphical Representations of Motion</h3>
 <p>The plots below show the angular motion of the forced damped pendulum under various parameter regimes:</p>
 <p><img alt="Forced Damped Pendulum Behaviors" src="../images/forced_damped_pendulum_behavior.png"/></p>
+<h2 id="limitations-and-potential-extensions">🧩 Limitations and Potential Extensions</h2>
+<h3 id="limitations-of-the-model">🔻 Limitations of the Model</h3>
+<ol>
+<li>
+<p><strong>Small-Angle Approximation (Linearization)</strong><br/>
+   The analytical solution assumes <span class="arithmatex">\( \sin(\theta) \approx \theta \)</span>, which is only valid for small angles (typically <span class="arithmatex">\( \theta &lt; 15^\circ \)</span>). For larger amplitudes, this approximation breaks down, and nonlinear effects become significant.</p>
+</li>
+<li>
+<p><strong>Simplified Damping Term</strong><br/>
+   The damping is modeled as linear (proportional to angular velocity), which is an idealization. Real-world systems may have more complex damping, including:</p>
+</li>
+<li>Nonlinear damping (e.g., quadratic air resistance)</li>
+<li>
+<p>Hysteresis damping (seen in materials like rubber)</p>
+</li>
+<li>
+<p><strong>Purely Periodic Driving Force</strong><br/>
+   The external driving force is assumed to be sinusoidal. This limits the exploration of real-world driving signals, which can be irregular, random, or pulsed.</p>
+</li>
+<li>
+<p><strong>Single-Degree-of-Freedom System</strong><br/>
+   The model treats the pendulum as a point mass on a rigid rod in 2D. It doesn’t account for:</p>
+</li>
+<li>Flexibility in the arm</li>
+<li>Multi-link or compound pendulums</li>
+<li>Effects like torque from a rotational base</li>
+</ol>
+<hr/>
+<h3 id="possible-extensions">🌱 Possible Extensions</h3>
+<ol>
+<li><strong>Nonlinear Damping Models</strong><br/>
+   Introduce damping proportional to <span class="arithmatex">\( \omega^2 \)</span> or a combination of linear and quadratic terms:</li>
+</ol>
+<p>[
+   \frac{d^2\theta}{dt^2} + (b_1 \omega + b_2 \omega^2) + \frac{g}{L} \sin(\theta) = A \cos(\omega_d t)
+   ]</p>
+<ol>
+<li><strong>Non-Periodic or Stochastic Forcing</strong><br/>
+   Replace the cosine term with:</li>
+<li>Square waves or pulse trains (digital actuation)</li>
+<li>Random noise (to model real-world perturbations)</li>
+<li>
+<p>Multi-frequency or modulated driving forces</p>
+</li>
+<li>
+<p><strong>Coupled Pendula or Multi-DOF Systems</strong><br/>
+   Study interactions between multiple pendulums (e.g., coupled oscillators or pendulum-on-cart systems) to simulate real engineering systems or molecular dynamics.</p>
+</li>
+<li>
+<p><strong>Chaotic Control and Synchronization</strong><br/>
+   Extend into chaos control techniques, such as:</p>
+</li>
+<li>Feedback control to stabilize unstable orbits</li>
+<li>
+<p>Phase-locking and synchronization of multiple chaotic systems</p>
+</li>
+<li>
+<p><strong>Energy Harvesting Models</strong><br/>
+   Modify the system to explore how mechanical energy from environmental oscillations (wind, waves, etc.) could be harvested efficiently under chaotic regimes.</p>
+</li>
+</ol>
+<h2 id="phase-portraits-poincare-sections-and-bifurcation-diagrams">📊 Phase Portraits, Poincaré Sections, and Bifurcation Diagrams</h2>
+<h3 id="phase-portraits">🔹 <strong>Phase Portraits</strong></h3>
+<p>A <strong>phase portrait</strong> provides a graphical representation of a system's trajectories in phase space (typically angle vs. angular velocity for the pendulum). These portraits illustrate the behavior of the system over time and can show:
+- <strong>Periodic motion</strong>: Closed curves indicating regular oscillations.
+- <strong>Chaotic motion</strong>: Dense, non-periodic trajectories filling a region of phase space.</p>
+<p>For the forced damped pendulum, we can visualize the transition from regular oscillations to chaos by plotting the system’s state variables <span class="arithmatex">\( (\theta, \omega) \)</span> at various time steps. Phase portraits are helpful for identifying:
+- <strong>Stable limit cycles</strong> for periodic motion.
+- <strong>Attractors</strong> for chaotic or quasiperiodic motion.</p>
+<h3 id="poincare-sections">🔹 <strong>Poincaré Sections</strong></h3>
+<p>A <strong>Poincaré section</strong> is a way to reduce continuous dynamics to a discrete map by sampling the state of the system at regular intervals or at specific moments (e.g., when <span class="arithmatex">\( \theta = 0 \)</span>). This technique is especially useful for understanding chaotic systems.</p>
+<p>By plotting points in the state space at these sampling moments, we can reveal:
+- <strong>Periodic orbits</strong>: Represented by distinct points or loops.
+- <strong>Strange attractors</strong>: Points clustered in irregular regions, indicative of chaotic dynamics.</p>
+<p>The Poincaré section helps identify the underlying structure of the system's dynamics by providing a snapshot of the system's behavior in a lower-dimensional subspace.</p>
+<h3 id="bifurcation-diagrams">🔹 <strong>Bifurcation Diagrams</strong></h3>
+<p>A <strong>bifurcation diagram</strong> shows how the equilibrium states or periodic orbits of a system change as a system parameter (e.g., driving amplitude <span class="arithmatex">\(A\)</span> or frequency <span class="arithmatex">\( \omega_d \)</span>) is varied. This diagram helps:
+- <strong>Identify critical parameter values</strong> where the system undergoes transitions from periodic to chaotic behavior (bifurcations).
+- <strong>Visualize the onset of chaos</strong>: Small variations in parameters may cause sudden qualitative changes in the system's motion, such as period-doubling bifurcations or the appearance of strange attractors.</p>
+<p>In the case of the forced damped pendulum, varying the amplitude <span class="arithmatex">\(A\)</span> or frequency <span class="arithmatex">\( \omega_d \)</span> of the external driving force can lead to dramatic changes in the system’s dynamics. A bifurcation diagram maps out these transitions and helps identify chaotic windows and periodic regions.</p>
+<hr/>
+<h3 id="example-implementation-and-visualization">Example Implementation and Visualization</h3>
+<p>To explore these concepts further, Python can be used to generate phase portraits, Poincaré sections, and bifurcation diagrams. This allows us to visualize the transition from regular to chaotic dynamics as the parameters (such as damping, driving force, and frequency) are varied. By plotting the system’s trajectories over time and capturing regular orbits in the Poincaré section, we can uncover complex dynamics that are not evident from the raw time series alone.</p>
+<h3 id="conclusion">📝 Conclusion</h3>
+<p>Phase portraits, Poincaré sections, and bifurcation diagrams are essential tools in the study of nonlinear dynamics and chaos theory. These techniques help simplify complex systems and allow us to visualize and understand the transitions from ordered to chaotic behavior in a variety of physical systems, including the forced damped pendulum.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
