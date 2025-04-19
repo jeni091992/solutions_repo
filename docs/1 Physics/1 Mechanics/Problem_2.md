@@ -127,5 +127,5 @@ These must be analyzed using:
 
 The plots below show the angular motion of the forced damped pendulum under various parameter regimes:
 
-![Forced Damped Pendulum Behaviors](./images/forced_damped_pendulum_behaviors.png)
+![Forced Damped Pendulum Behaviors](./images/forced_damped_pendulum_behavior.png)
 
