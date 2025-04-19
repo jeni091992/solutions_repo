@@ -8,21 +8,15 @@
 
 - **First Cosmic Velocity (Orbital Velocity):**  
   The minimum velocity required to achieve a stable circular orbit just above a planet’s surface.  
-  \[
-  v_1 = \sqrt{\frac{G M}{R}}
-  \]
+  $$ v_1 = \sqrt{\frac{G M}{R}} $$
 
 - **Second Cosmic Velocity (Escape Velocity):**  
   The velocity required to completely escape the gravitational field of a planet without further propulsion.  
-  \[
-  v_2 = \sqrt{2} \cdot v_1 = \sqrt{\frac{2 G M}{R}}
-  \]
+  $$ v_2 = \sqrt{2} \cdot v_1 = \sqrt{\frac{2 G M}{R}} $$
 
 - **Third Cosmic Velocity (Solar System Escape):**  
   The velocity needed to escape the gravitational field of the Sun from Earth’s orbit.  
-  \[
-  v_3 = \sqrt{v_{e,\text{sun}}^2 + v_\text{earth}^2}
-  \]  
+  $$ v_3 = \sqrt{v_{e,\text{sun}}^2 + v_\text{earth}^2} $$  
   where \( v_{e,\text{sun}} \) is the Sun escape velocity from Earth’s orbit and \( v_\text{earth} \) is Earth’s orbital speed around the Sun.
 
 ---
@@ -32,20 +26,13 @@
 Starting from Newton’s law of universal gravitation:
 
 - Gravitational potential energy:  
-  \[
-  U = -\frac{G M m}{R}
-  \]
+  $$ U = -\frac{G M m}{R} $$
 
 - Kinetic energy:  
-  \[
-  K = \frac{1}{2} m v^2
-  \]
+  $$ K = \frac{1}{2} m v^2 $$
 
 To escape gravity, total energy must be zero:  
-\[
-K + U = 0 \Rightarrow \frac{1}{2} m v^2 = \frac{G M m}{R}
-\Rightarrow v = \sqrt{\frac{2 G M}{R}}
-\]
+$$ K + U = 0 \Rightarrow \frac{1}{2} m v^2 = \frac{G M m}{R} \Rightarrow v = \sqrt{\frac{2 G M}{R}} $$
 
 This is the **escape velocity (second cosmic velocity)**.
 
