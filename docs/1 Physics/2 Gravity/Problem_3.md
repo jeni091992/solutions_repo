@@ -127,6 +127,6 @@ The computational tool for simulating and visualizing the motion of the payload 
 
 ### Visualizing the Payload Path
 
-![Payload Path Simulation](./images/payload_path_simulation.png)
+![Payload Path Simulation](./images/payload_trajectory_simulation_advanced.png)
 
 ---
