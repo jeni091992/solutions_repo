@@ -58,6 +58,22 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#escape-velocities-and-cosmic-velocities">Escape Velocities and Cosmic Velocities</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-definitions-of-cosmic-velocities">1. Definitions of Cosmic Velocities</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-mathematical-derivations">2. Mathematical Derivations</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-calculations-for-earth-mars-and-jupiter">3. Calculations for Earth, Mars, and Jupiter</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#4-visualization">4. Visualization</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#5-importance-in-space-exploration">5. Importance in Space Exploration</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_3/">Problem 3</a>
@@ -171,7 +187,115 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-2">Problem 2</h1>
+<h2 id="problem-2">Problem 2</h2>
+<h3 id="escape-velocities-and-cosmic-velocities">Escape Velocities and Cosmic Velocities</h3>
+<hr/>
+<h4 id="1-definitions-of-cosmic-velocities">1. Definitions of Cosmic Velocities</h4>
+<ul>
+<li>
+<p><strong>First Cosmic Velocity (Orbital Velocity):</strong><br/>
+  The minimum velocity required to achieve a stable circular orbit just above a planet’s surface.<br/>
+  [
+  v_1 = \sqrt{\frac{G M}{R}}
+  ]</p>
+</li>
+<li>
+<p><strong>Second Cosmic Velocity (Escape Velocity):</strong><br/>
+  The velocity required to completely escape the gravitational field of a planet without further propulsion.<br/>
+  [
+  v_2 = \sqrt{2} \cdot v_1 = \sqrt{\frac{2 G M}{R}}
+  ]</p>
+</li>
+<li>
+<p><strong>Third Cosmic Velocity (Solar System Escape):</strong><br/>
+  The velocity needed to escape the gravitational field of the Sun from Earth’s orbit.<br/>
+  [
+  v_3 = \sqrt{v_{e,\text{sun}}^2 + v_\text{earth}^2}
+  ]<br/>
+  where <span class="arithmatex">\( v_{e,\text{sun}} \)</span> is the Sun escape velocity from Earth’s orbit and <span class="arithmatex">\( v_\text{earth} \)</span> is Earth’s orbital speed around the Sun.</p>
+</li>
+</ul>
+<hr/>
+<h4 id="2-mathematical-derivations">2. Mathematical Derivations</h4>
+<p>Starting from Newton’s law of universal gravitation:</p>
+<ul>
+<li>
+<p>Gravitational potential energy:<br/>
+  [
+  U = -\frac{G M m}{R}
+  ]</p>
+</li>
+<li>
+<p>Kinetic energy:<br/>
+  [
+  K = \frac{1}{2} m v^2
+  ]</p>
+</li>
+</ul>
+<p>To escape gravity, total energy must be zero:<br/>
+[
+K + U = 0 \Rightarrow \frac{1}{2} m v^2 = \frac{G M m}{R}
+\Rightarrow v = \sqrt{\frac{2 G M}{R}}
+]</p>
+<p>This is the <strong>escape velocity (second cosmic velocity)</strong>.</p>
+<hr/>
+<h4 id="3-calculations-for-earth-mars-and-jupiter">3. Calculations for Earth, Mars, and Jupiter</h4>
+<table>
+<thead>
+<tr>
+<th>Planet</th>
+<th>Radius (km)</th>
+<th>Mass (kg)</th>
+<th>v₁ (km/s)</th>
+<th>v₂ (km/s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Earth</td>
+<td>6,371</td>
+<td>5.972 × 10²⁴</td>
+<td>7.91</td>
+<td>11.2</td>
+</tr>
+<tr>
+<td>Mars</td>
+<td>3,390</td>
+<td>6.39 × 10²³</td>
+<td>3.55</td>
+<td>5.03</td>
+</tr>
+<tr>
+<td>Jupiter</td>
+<td>69,911</td>
+<td>1.898 × 10²⁷</td>
+<td>42.1</td>
+<td>59.5</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note:</strong><br/>
+First cosmic velocity <span class="arithmatex">\( v_1 = \sqrt{G M / R} \)</span><br/>
+Second cosmic velocity <span class="arithmatex">\( v_2 = \sqrt{2 G M / R} \)</span></p>
+</blockquote>
+<hr/>
+<h4 id="4-visualization">4. Visualization</h4>
+<p>📊 <strong>Cosmic Velocities by Planet</strong></p>
+<p><img alt="Cosmic Velocities Chart" src="../images/cosmic_velocities.png"/></p>
+<p><em>(You can generate this chart using matplotlib, plotting v₁ and v₂ side-by-side for each planet.)</em></p>
+<hr/>
+<h4 id="5-importance-in-space-exploration">5. Importance in Space Exploration</h4>
+<ul>
+<li><strong>First Cosmic Velocity:</strong> Used to place satellites into orbit (e.g., GPS, weather satellites).</li>
+<li><strong>Second Cosmic Velocity:</strong> Required for interplanetary travel (e.g., Moon missions, Mars rovers).</li>
+<li><strong>Third Cosmic Velocity:</strong> Relevant for interstellar missions (e.g., Voyager probes, theoretical deep space travel).</li>
+<li>These thresholds determine fuel requirements, propulsion design, and mission feasibility.</li>
+</ul>
+<hr/>
+<h3 id="conclusion">Conclusion</h3>
+<p>Understanding and applying cosmic velocities enables humanity to navigate space—from orbiting Earth to reaching distant stars. Their derivation from basic physical laws illustrates the power of physics to guide cutting-edge technology and exploration.</p>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
