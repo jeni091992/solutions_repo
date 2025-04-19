@@ -267,6 +267,97 @@
 <hr/>
 <h3 id="visualizing-trajectories-near-earth">Visualizing Trajectories Near Earth</h3>
 <p><img alt="Payload Trajectories Near Earth" src="../images/payload_trajectories_near_earth.png"/></p>
+<hr/>
+<h2 id="task-2-perform-a-numerical-analysis-to-compute-the-path-of-the-payload">Task 2: Perform a Numerical Analysis to Compute the Path of the Payload</h2>
+<p>To compute the path of a payload released near Earth, we can numerically integrate the equations of motion under Earth's gravity using the <strong>Runge-Kutta 4th order (RK4)</strong> method. The motion is governed by Newton's law of gravitation, and we will simulate the trajectory considering initial conditions like <strong>position</strong>, <strong>velocity</strong>, and <strong>altitude</strong>.</p>
+<h3 id="visualizing-the-payload-path">Visualizing the Payload Path</h3>
+<p><img alt="Payload Path Simulation" src="../images/payload_path_simulation.png"/></p>
+<hr/>
+<h2 id="task-3-discuss-how-these-trajectories-relate-to-orbital-insertion-reentry-or-escape-scenarios">Task 3: Discuss How These Trajectories Relate to Orbital Insertion, Reentry, or Escape Scenarios</h2>
+<h4 id="1-elliptical-trajectory_1">1. <strong>Elliptical Trajectory</strong>:</h4>
+<ul>
+<li><strong>Relation to Orbital Insertion</strong>:<br/>
+  An elliptical trajectory is the most common path for objects that are successfully inserted into an orbit around Earth. This is typically the result of a spacecraft being launched with the correct velocity to reach a <strong>bound orbit</strong>, which means it will continue to orbit Earth instead of escaping into space or falling back to Earth. The path is elliptical, with Earth at one of the foci, and the object will move between a perigee (closest point) and an apogee (farthest point).  </li>
+<li>
+<p><strong>Example</strong>: Satellites in Low Earth Orbit (LEO) or Geostationary Orbit (GEO).</p>
+</li>
+<li>
+<p><strong>Key Consideration</strong>: For orbital insertion, the velocity must be sufficient to overcome Earth's gravity but not so high as to escape it. If the payload's speed is too low, it will fall back to Earth, whereas if it's too high, it will follow an escape trajectory (hyperbolic).</p>
+</li>
+</ul>
+<h4 id="2-parabolic-trajectory_1">2. <strong>Parabolic Trajectory</strong>:</h4>
+<ul>
+<li><strong>Relation to Escape and Orbital Insertion</strong>:<br/>
+  A parabolic trajectory represents the <strong>escape velocity threshold</strong>—the precise speed needed to break free from Earth's gravity without any residual velocity at infinity. A payload that follows a parabolic trajectory is on a <strong>marginal escape path</strong>, where the total mechanical energy of the system is exactly zero. It does not stay in orbit, nor does it escape with excess velocity.  </li>
+<li>
+<p><strong>Example</strong>: A spacecraft launched with exactly the escape velocity (which depends on the altitude and gravitational influence).</p>
+</li>
+<li>
+<p><strong>Key Consideration</strong>: Parabolic trajectories are <strong>transitional</strong>. They are relevant in cases where the objective is to escape Earth's gravitational influence but <strong>not gain any excess energy</strong> that would cause the payload to overshoot or move into another planetary system.</p>
+</li>
+</ul>
+<h4 id="3-hyperbolic-trajectory_1">3. <strong>Hyperbolic Trajectory</strong>:</h4>
+<ul>
+<li><strong>Relation to Escape and Interplanetary Missions</strong>:<br/>
+  A hyperbolic trajectory indicates that the object's velocity is <strong>greater than the escape velocity</strong> at the point of release, which means it is on a <strong>hyperbolic escape path</strong>. In this scenario, the payload is no longer bound to Earth and will escape Earth's gravitational influence. The trajectory will continue outward in a hyperbolic curve.  </li>
+<li>
+<p><strong>Example</strong>: Interplanetary probes, such as the Voyager missions or the New Horizons mission, which were launched on hyperbolic escape trajectories toward other planets and beyond.</p>
+</li>
+<li>
+<p><strong>Key Consideration</strong>: Hyperbolic trajectories are crucial for missions aimed at traveling <strong>beyond Earth</strong>, such as <strong>deep space exploration</strong>. These trajectories represent unbound motion, with the payload leaving Earth's sphere of influence, often on a path toward another celestial body.</p>
+</li>
+</ul>
+<h4 id="4-suborbital-ballistic-trajectory">4. <strong>Suborbital (Ballistic) Trajectory</strong>:</h4>
+<ul>
+<li><strong>Relation to Reentry and Atmospheric Entry</strong>:<br/>
+  Suborbital trajectories occur when a payload is launched <strong>without enough velocity to enter orbit</strong>, and the object follows a curved, parabolic-like path back to Earth. These trajectories are typically associated with <strong>spacecraft reentry</strong>, <strong>sounding rockets</strong>, or <strong>space tourism</strong>.  </li>
+<li>
+<p><strong>Example</strong>: A spacecraft launched on a <strong>ballistic trajectory</strong> that reaches space but does not have enough speed to remain in orbit. It will eventually return to Earth, experiencing atmospheric reentry.</p>
+</li>
+<li>
+<p><strong>Key Consideration</strong>: Suborbital trajectories are key to <strong>reentry</strong> missions, where spacecraft, like space capsules or crewed vehicles, must follow a controlled descent path back to Earth. Managing the trajectory during reentry is critical to ensuring that the spacecraft slows down enough to prevent excessive heating during atmospheric entry, allowing for a safe landing.</p>
+</li>
+</ul>
+<hr/>
+<h3 id="summary-of-key-relationships">Summary of Key Relationships:</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Trajectory Type</strong></th>
+<th><strong>Key Scenario</strong></th>
+<th><strong>Nature</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Elliptical</strong></td>
+<td><strong>Orbital Insertion</strong></td>
+<td>Bound motion around Earth</td>
+</tr>
+<tr>
+<td><strong>Parabolic</strong></td>
+<td><strong>Escape (Marginal)</strong></td>
+<td>Just at escape velocity</td>
+</tr>
+<tr>
+<td><strong>Hyperbolic</strong></td>
+<td><strong>Escape (Interplanetary Missions)</strong></td>
+<td>Unbound, beyond Earth's influence</td>
+</tr>
+<tr>
+<td><strong>Suborbital</strong></td>
+<td><strong>Reentry or Space Tourism</strong></td>
+<td>Curved path returning to Earth</td>
+</tr>
+</tbody>
+</table>
+<p>In space missions, understanding these trajectories is crucial for determining mission parameters, from launching satellites into orbit to planning interplanetary missions or reentering Earth’s atmosphere.</p>
+<hr/>
+<h2 id="task-4-develop-a-computational-tool-to-simulate-and-visualize-the-motion-of-the-payload">Task 4: Develop a Computational Tool to Simulate and Visualize the Motion of the Payload</h2>
+<p>The computational tool for simulating and visualizing the motion of the payload under Earth's gravity is implemented using numerical integration methods, such as the <strong>Runge-Kutta 4th order (RK4)</strong> method, to solve the equations of motion. The tool takes into account initial conditions like <strong>initial velocity</strong>, <strong>initial position</strong>, and <strong>altitude</strong>.</p>
+<h3 id="visualizing-the-payload-path_1">Visualizing the Payload Path</h3>
+<p><img alt="Payload Path Simulation" src="../images/payload_path_simulation.png"/></p>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
