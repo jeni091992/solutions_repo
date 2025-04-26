@@ -1,13 +1,3 @@
-Got it — you want the **same clean structure** with **headers, short definitions, equations, expandable Python code blocks, visualizations, and conclusion**, just like your "Problem 2" example.
-
-I'll completely reformat your original Problem 3 to **match**.
-
----
-
-Here’s the new version:
-
----
-
 ## Problem 3
 
 ### Trajectories of a Payload Released Near Earth
