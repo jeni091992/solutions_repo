@@ -188,7 +188,80 @@
 - <strong>External driving</strong>: <span class="arithmatex">\( A\cos(\omega_d t) \)</span></p>
 <p>❗<strong>General solutions to this equation cannot be written in closed form.</strong> Numerical techniques are necessary.</p>
 <hr/>
-<h3 id="2-linearized-case-small-angle-approximation"><strong>2. Linearized Case (Small-Angle Approximation)</strong></h3>
+<h3 id="2-python-implementation-for-simulations"><strong>2. Python Implementation for Simulations</strong></h3>
+<p>Below is a Python script to simulate the forced damped pendulum and generate phase portraits, Poincaré sections, and bifurcation diagrams.</p>
+<details>
+<summary>Click to expand Python code</summary>
+<pre><code class="language-python"># filepath: /simulations/forced_damped_pendulum.py
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Parameters
+g = 9.81  # gravitational acceleration (m/s^2)
+L = 1.0   # length of pendulum (m)
+b = 0.5   # damping coefficient
+A = 1.5   # driving amplitude
+omega_d = 2.0  # driving frequency
+
+# Define the ODE system
+def forced_damped_pendulum(t, y, b, g, L, A, omega_d):
+    theta, omega = y
+    dydt = [omega, -b * omega - (g / L) * np.sin(theta) + A * np.cos(omega_d * t)]
+    return dydt
+
+# Solve the ODE
+t_span = (0, 50)
+y0 = [0.1, 0]  # initial conditions: [theta, omega]
+t_eval = np.linspace(t_span[0], t_span[1], 1000)
+sol = solve_ivp(forced_damped_pendulum, t_span, y0, t_eval=t_eval, args=(b, g, L, A, omega_d))
+
+# Extract results
+theta = sol.y[0]
+omega = sol.y[1]
+time = sol.t
+
+# Plot Phase Portrait
+plt.figure(figsize=(8, 6))
+plt.plot(theta, omega, label="Phase Portrait")
+plt.xlabel("Theta (rad)")
+plt.ylabel("Angular Velocity (rad/s)")
+plt.title("Phase Portrait of Forced Damped Pendulum")
+plt.legend()
+plt.grid()
+plt.show()
+
+# Poincaré Section
+poincare_theta = theta[::50]
+poincare_omega = omega[::50]
+plt.figure(figsize=(8, 6))
+plt.scatter(poincare_theta, poincare_omega, s=10, label="Poincaré Section")
+plt.xlabel("Theta (rad)")
+plt.ylabel("Angular Velocity (rad/s)")
+plt.title("Poincaré Section of Forced Damped Pendulum")
+plt.legend()
+plt.grid()
+plt.show()
+
+# Bifurcation Diagram (varying driving amplitude)
+amplitudes = np.linspace(0.5, 2.5, 50)
+bifurcation_data = []
+for A in amplitudes:
+    sol = solve_ivp(forced_damped_pendulum, t_span, y0, t_eval=t_eval, args=(b, g, L, A, omega_d))
+    bifurcation_data.append(sol.y[0][-100:])  # last 100 points
+
+plt.figure(figsize=(8, 6))
+for i, A in enumerate(amplitudes):
+    plt.scatter([A] * len(bifurcation_data[i]), bifurcation_data[i], s=1, color="blue")
+plt.xlabel("Driving Amplitude (A)")
+plt.ylabel("Theta (rad)")
+plt.title("Bifurcation Diagram of Forced Damped Pendulum")
+plt.grid()
+plt.show()
+</code></pre>
+</details>
+<hr/>
+<h3 id="3-linearized-case-small-angle-approximation"><strong>3. Linearized Case (Small-Angle Approximation)</strong></h3>
 <p>For small oscillations <span class="arithmatex">\( \theta \ll 1 \)</span>, we use:</p>
 <div class="arithmatex">\[
 \sin(\theta) \approx \theta
@@ -232,7 +305,7 @@ B = \frac{A}{\sqrt{(\omega_0^2 - \omega_d^2)^2 + b^2\omega_d^2}} \\
 \delta = \tan^{-1}\left( \frac{b\omega_d}{\omega_0^2 - \omega_d^2} \right)
 \]</div>
 <hr/>
-<h3 id="3-resonance-behavior"><strong>3. Resonance Behavior</strong></h3>
+<h3 id="4-resonance-behavior"><strong>4. Resonance Behavior</strong></h3>
 <ul>
 <li>Resonance occurs when the driving frequency <span class="arithmatex">\( \omega_d \)</span> is near the natural frequency <span class="arithmatex">\( \omega_0 \)</span></li>
 <li>The system’s response peaks when:</li>
@@ -242,7 +315,7 @@ B = \frac{A}{\sqrt{(\omega_0^2 - \omega_d^2)^2 + b^2\omega_d^2}} \\
 \]</div>
 <p>The amplitude increases dramatically unless damping <span class="arithmatex">\( b \)</span> is large.</p>
 <hr/>
-<h3 id="4-numerical-and-chaotic-solutions-full-nonlinear-case"><strong>4. Numerical and Chaotic Solutions (Full Nonlinear Case)</strong></h3>
+<h3 id="5-numerical-and-chaotic-solutions-full-nonlinear-case"><strong>5. Numerical and Chaotic Solutions (Full Nonlinear Case)</strong></h3>
 <p>For larger amplitudes, the small-angle approximation breaks down, and <strong>nonlinear effects dominate</strong>, especially when:
 - <span class="arithmatex">\( A \)</span> is large (strong driving)
 - <span class="arithmatex">\( b \)</span> is small (weak damping)</p>
@@ -258,7 +331,7 @@ B = \frac{A}{\sqrt{(\omega_0^2 - \omega_d^2)^2 + b^2\omega_d^2}} \\
 - <strong>Lyapunov Exponents</strong>
 - <strong>Bifurcation Diagrams</strong></p>
 <hr/>
-<h3 id="5-summary-of-behavior-by-regime"><strong>5. Summary of Behavior by Regime</strong></h3>
+<h3 id="6-summary-of-behavior-by-regime"><strong>6. Summary of Behavior by Regime</strong></h3>
 <table>
 <thead>
 <tr>
