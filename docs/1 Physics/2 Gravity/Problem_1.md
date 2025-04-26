@@ -8,15 +8,16 @@
 
 We start with Newton’s Law of Gravitation and the formula for centripetal force.
 
-- **Gravitational Force:**  
-  \[
-  F_g = \frac{G M m}{r^2}
-  \]
+**Gravitational Force:**
+$$
+F_g = \frac{G M m}{r^2}
+$$
 
-- **Centripetal Force:**  
-  \[
-  F_c = \frac{m v^2}{r}
-  \]
+**Centripetal Force:**
+$$
+F_c = \frac{m v^2}{r}
+$$
+
 
 Equating the two forces for a body in circular orbit:
 
