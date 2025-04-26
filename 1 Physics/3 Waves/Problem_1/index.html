@@ -189,8 +189,6 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<p>Here is the corrected markdown with properly rendered formulas:</p>
-<hr/>
 <h2 id="problem-1">Problem 1</h2>
 <h3 id="interference-patterns-on-a-water-surface">Interference Patterns on a Water Surface</h3>
 <hr/>
@@ -198,9 +196,7 @@
 <ul>
 <li><strong>Wave Equation for a Single Source:</strong><br/>
   The displacement <span class="arithmatex">\( u \)</span> at a point <span class="arithmatex">\( (x, y) \)</span> on the water surface, due to a single point source located at <span class="arithmatex">\( (x_s, y_s) \)</span>, is given by the equation:<br/>
-  [
-  u(x, y, t) = A \cos(k \cdot r - \omega t + \phi)
-  ]
+  $$ u(x, y, t) = A \cos(k \cdot r - \omega t + \phi) $$<br/>
   where:</li>
 <li><span class="arithmatex">\( A \)</span> is the amplitude of the wave.</li>
 <li><span class="arithmatex">\( k = \frac{2\pi}{\lambda} \)</span> is the wave number, with <span class="arithmatex">\( \lambda \)</span> being the wavelength.</li>
@@ -212,9 +208,7 @@
 <li>
 <p><strong>Superposition Principle:</strong><br/>
   When multiple sources emit waves, the total displacement at any point <span class="arithmatex">\( (x, y) \)</span> on the water surface is the sum of the displacements from all the sources:<br/>
-  [
-  u_{\text{total}}(x, y, t) = \sum_{i=1}^{N} A \cos(k \cdot r_i - \omega t + \phi_i)
-  ]
+  $$ u_{\text{total}}(x, y, t) = \sum_{i=1}^{N} A \cos(k \cdot r_i - \omega t + \phi_i) $$<br/>
   where <span class="arithmatex">\( N \)</span> is the number of sources (the vertices of the polygon), and <span class="arithmatex">\( r_i \)</span> is the distance from the point <span class="arithmatex">\( (x, y) \)</span> to the <span class="arithmatex">\( i \)</span>-th source.</p>
 </li>
 </ul>
@@ -223,9 +217,7 @@
 <ul>
 <li><strong>Displacement for Multiple Sources:</strong><br/>
   Given that the sources are placed at the vertices of a regular polygon, the resulting displacement at any point <span class="arithmatex">\( (x, y) \)</span> is the sum of the individual wave contributions from each vertex:
-  [
-  u_{\text{total}}(x, y, t) = \sum_{i=1}^{N} A \cos(k \cdot r_i - \omega t + \phi_i)
-  ]
+  $$ u_{\text{total}}(x, y, t) = \sum_{i=1}^{N} A \cos(k \cdot r_i - \omega t + \phi_i) $$<br/>
   where:</li>
 <li><span class="arithmatex">\( r_i = \sqrt{(x - x_s)^2 + (y - y_s)^2} \)</span> is the distance from the source at <span class="arithmatex">\( (x_s, y_s) \)</span> to the point <span class="arithmatex">\( (x, y) \)</span>.</li>
 <li><span class="arithmatex">\( N \)</span> is the number of vertices in the polygon, with the sources placed at equal angles.</li>
