@@ -1,3 +1,7 @@
+Here is the corrected markdown with properly rendered formulas:
+
+---
+
 ## Problem 1
 
 ### Interference Patterns on a Water Surface
