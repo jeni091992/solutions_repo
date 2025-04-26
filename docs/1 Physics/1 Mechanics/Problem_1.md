@@ -69,7 +69,9 @@ Adding complexities like air resistance leads to asymmetric trajectories and red
 ---
 
 ### **4. Implementation in Python**
-A simple simulation can use **NumPy** and **Matplotlib** to visualize the range:
+
+<details>
+<summary>Click to expand Python code</summary>
 
 ```python
 import numpy as np
@@ -98,6 +100,8 @@ plt.grid()
 plt.savefig("range_vs_angle.png", dpi=300)  # Save as PNG with high resolution
 plt.show()
 ```
+
+</details>
 
 ### Graphical Representation
 
