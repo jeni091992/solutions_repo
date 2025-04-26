@@ -110,7 +110,7 @@ def find_parallel_nodes(circuit_graph):
 
 #### 4. Test Cases and Examples
 
-- **Example 1: Simple Series and Parallel Combinations**
+**Example 1: Simple Series and Parallel Combinations**
 
   Consider a circuit with two resistors \( R_1 = 10 \, \Omega \) and \( R_2 = 5 \, \Omega \).
 
@@ -126,7 +126,7 @@ def find_parallel_nodes(circuit_graph):
      R_{\text{eq}} = \frac{R_1 \cdot R_2}{R_1 + R_2} = \frac{10 \cdot 5}{10 + 5} = \frac{50}{15} = 3.33 \, \Omega
      $$
 
-- **Example 2: Nested Configurations**
+**Example 2: Nested Configurations**
 
   Consider a circuit with:
   - \( R_1 = 10 \, \Omega \), \( R_2 = 5 \, \Omega \) in series, and
@@ -142,7 +142,7 @@ def find_parallel_nodes(circuit_graph):
      \frac{1}{R_{\text{eq}}} = \frac{1}{R_{\text{series}}} + \frac{1}{R_3} = \frac{1}{15} + \frac{1}{15} = \frac{2}{15} \quad \Rightarrow \quad R_{\text{eq}} = 7.5 \, \Omega
      $$
 
-- **Example 3: Complex Graph with Cycles**
+**Example 3: Complex Graph with Cycles**
 
   For a more complex circuit containing cycles, the algorithm uses **depth-first search (DFS)** or **breadth-first search (BFS)** techniques to identify cycles and simplify the circuit. By detecting these cycles, the algorithm can apply Kirchhoff's laws or reduction techniques, recursively simplifying the circuit until it converges to a single equivalent resistance.
 
