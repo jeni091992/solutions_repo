@@ -22,19 +22,19 @@
 
 - **Identifying Series and Parallel Connections:**
   - **Series Connection:**  
-    Resistors are in series if they are connected end-to-end with no intermediate junction. The equivalent resistance \( R_{\text{eq}} \) for two resistors \( R_1 \) and \( R_2 \) in series is:
-    \[
+    Resistors are in series if they are connected end-to-end with no intermediate junction. The equivalent resistance for two resistors \( R_1 \) and \( R_2 \) in series is:
+    $$
     R_{\text{eq}} = R_1 + R_2
-    \]
+    $$
   - **Parallel Connection:**  
-    Resistors are in parallel if they share both ends at the same junction. The equivalent resistance \( R_{\text{eq}} \) for two resistors \( R_1 \) and \( R_2 \) in parallel is:
-    \[
+    Resistors are in parallel if they share both ends at the same junction. The equivalent resistance for two resistors \( R_1 \) and \( R_2 \) in parallel is:
+    $$
     \frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2}
-    \]
+    $$
     or equivalently:
-    \[
+    $$
     R_{\text{eq}} = \frac{R_1 \cdot R_2}{R_1 + R_2}
-    \]
+    $$
 
 - **Iterative Graph Reduction:**
   - The circuit is iteratively simplified by detecting series and parallel connections.
@@ -104,14 +104,6 @@ def find_series_nodes(circuit_graph):
 def find_parallel_nodes(circuit_graph):
     # Identify and return two nodes connected in parallel
     pass
-
-def remove_resistors(circuit_graph, nodes):
-    # Remove the identified resistors from the graph
-    pass
-
-def add_combined_resistor(circuit_graph, nodes, resistance):
-    # Add the new combined resistor to the graph
-    pass
 ```
 
 ---
@@ -120,13 +112,13 @@ def add_combined_resistor(circuit_graph, nodes, resistance):
 
 - **Example 1: Simple Series and Parallel Combinations**
   - For a circuit with two resistors in series \( R_1 = 10 \, \Omega \) and \( R_2 = 5 \, \Omega \), the algorithm will compute:
-    \[
+    $$
     R_{\text{eq}} = R_1 + R_2 = 10 + 5 = 15 \, \Omega
-    \]
+    $$
   - For a circuit with two resistors in parallel \( R_1 = 10 \, \Omega \) and \( R_2 = 5 \, \Omega \), the algorithm will compute:
-    \[
+    $$
     R_{\text{eq}} = \frac{R_1 \cdot R_2}{R_1 + R_2} = \frac{10 \cdot 5}{10 + 5} = \frac{50}{15} = 3.33 \, \Omega
-    \]
+    $$
 
 - **Example 2: Nested Configurations**
   - A circuit where resistors are first simplified in series and then in parallel will be handled by recursively applying the series and parallel reduction steps until only one equivalent resistance remains.
