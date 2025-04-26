@@ -130,7 +130,7 @@ The following visualizations are generated based on the simulation:
 
 ---
 
-#### 5. Conclusion
+### Conclusion
 
 The simulation demonstrates how charged particles move in electric and magnetic fields, governed by the Lorentz force. By varying parameters such as field strength and particle properties, we can simulate real-world systems such as particle accelerators, mass spectrometers, and plasma confinement devices.
 
