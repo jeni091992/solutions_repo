@@ -140,7 +140,7 @@ def find_parallel_nodes(circuit_graph):
 
 ---
 
-#### Conclusion
+### Conclusion
 
 By using graph theory to represent and analyze electrical circuits, this algorithm simplifies the task of calculating the equivalent resistance. The iterative reduction of series and parallel connections provides an efficient method for handling both simple and complex circuits, including those with nested and cyclical resistor configurations.
 
