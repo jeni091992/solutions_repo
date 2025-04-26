@@ -1,6 +1,3 @@
-Here is the markdown addressing the task requirements and deliverables for **Equivalent Resistance Using Graph Theory**:
-
-```markdown
 ## Problem 1
 
 ### Equivalent Resistance Using Graph Theory
@@ -158,4 +155,3 @@ By using graph theory to represent and analyze electrical circuits, this algorit
 This approach not only simplifies circuit analysis but also enhances the ability to automate and optimize the process, making it ideal for applications in circuit simulation and design.
 
 ---
-```
