@@ -241,8 +241,9 @@ The plots below show the angular motion of the forced damped pendulum under vari
    Introduce damping proportional to \( \omega^2 \) or a combination of linear and quadratic terms:
 
    \[
-   \frac{d^2\theta}{dt^2} + \left(b_1 \frac{d\theta}{dt} + b_2 \left(\frac{d\theta}{dt}\right)^2\right) + \frac{g}{L} \sin(\theta) = A \cos(\omega_d t)
+   \frac{d^2\theta}{dt^2} + b_1 \frac{d\theta}{dt} + b_2\left( \frac{d\theta}{dt} \right)^2 + \frac{g}{L} \sin(\theta) = A \cos(\omega_d t)
    \]
+
 
    Here:
    - \( b_1 \): Linear damping coefficient (proportional to velocity).
