@@ -1,7 +1,3 @@
-Here is the corrected markdown with properly rendered formulas:
-
----
-
 ## Problem 1
 
 ### Interference Patterns on a Water Surface
@@ -12,9 +8,7 @@ Here is the corrected markdown with properly rendered formulas:
 
 - **Wave Equation for a Single Source:**  
   The displacement \( u \) at a point \( (x, y) \) on the water surface, due to a single point source located at \( (x_s, y_s) \), is given by the equation:  
-  \[
-  u(x, y, t) = A \cos(k \cdot r - \omega t + \phi)
-  \]
+  $$ u(x, y, t) = A \cos(k \cdot r - \omega t + \phi) $$  
   where:
   - \( A \) is the amplitude of the wave.
   - \( k = \frac{2\pi}{\lambda} \) is the wave number, with \( \lambda \) being the wavelength.
@@ -24,9 +18,7 @@ Here is the corrected markdown with properly rendered formulas:
 
 - **Superposition Principle:**  
   When multiple sources emit waves, the total displacement at any point \( (x, y) \) on the water surface is the sum of the displacements from all the sources:  
-  \[
-  u_{\text{total}}(x, y, t) = \sum_{i=1}^{N} A \cos(k \cdot r_i - \omega t + \phi_i)
-  \]
+  $$ u_{\text{total}}(x, y, t) = \sum_{i=1}^{N} A \cos(k \cdot r_i - \omega t + \phi_i) $$  
   where \( N \) is the number of sources (the vertices of the polygon), and \( r_i \) is the distance from the point \( (x, y) \) to the \( i \)-th source.
 
 ---
@@ -35,9 +27,7 @@ Here is the corrected markdown with properly rendered formulas:
 
 - **Displacement for Multiple Sources:**  
   Given that the sources are placed at the vertices of a regular polygon, the resulting displacement at any point \( (x, y) \) is the sum of the individual wave contributions from each vertex:
-  \[
-  u_{\text{total}}(x, y, t) = \sum_{i=1}^{N} A \cos(k \cdot r_i - \omega t + \phi_i)
-  \]
+  $$ u_{\text{total}}(x, y, t) = \sum_{i=1}^{N} A \cos(k \cdot r_i - \omega t + \phi_i) $$  
   where:
   - \( r_i = \sqrt{(x - x_s)^2 + (y - y_s)^2} \) is the distance from the source at \( (x_s, y_s) \) to the point \( (x, y) \).
   - \( N \) is the number of vertices in the polygon, with the sources placed at equal angles.
