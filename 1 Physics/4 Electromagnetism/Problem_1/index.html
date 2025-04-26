@@ -295,9 +295,7 @@ def find_parallel_nodes(circuit_graph):
 </code></pre>
 <hr/>
 <h4 id="4-test-cases-and-examples">4. Test Cases and Examples</h4>
-<ul>
-<li><strong>Example 1: Simple Series and Parallel Combinations</strong></li>
-</ul>
+<p><strong>Example 1: Simple Series and Parallel Combinations</strong></p>
 <p>Consider a circuit with two resistors <span class="arithmatex">\( R_1 = 10 \, \Omega \)</span> and <span class="arithmatex">\( R_2 = 5 \, \Omega \)</span>.</p>
 <ol>
 <li>
@@ -314,10 +312,8 @@ def find_parallel_nodes(circuit_graph):
      R_{\text{eq}} = \frac{R_1 \cdot R_2}{R_1 + R_2} = \frac{10 \cdot 5}{10 + 5} = \frac{50}{15} = 3.33 \, \Omega
      $$</p>
 </li>
-<li>
-<p><strong>Example 2: Nested Configurations</strong></p>
-</li>
 </ol>
+<p><strong>Example 2: Nested Configurations</strong></p>
 <p>Consider a circuit with:
   - <span class="arithmatex">\( R_1 = 10 \, \Omega \)</span>, <span class="arithmatex">\( R_2 = 5 \, \Omega \)</span> in series, and
   - <span class="arithmatex">\( R_3 = 15 \, \Omega \)</span> in parallel with the series combination of <span class="arithmatex">\( R_1 \)</span> and <span class="arithmatex">\( R_2 \)</span>.</p>
@@ -334,10 +330,8 @@ def find_parallel_nodes(circuit_graph):
      \frac{1}{R_{\text{eq}}} = \frac{1}{R_{\text{series}}} + \frac{1}{R_3} = \frac{1}{15} + \frac{1}{15} = \frac{2}{15} \quad \Rightarrow \quad R_{\text{eq}} = 7.5 \, \Omega
      $$</p>
 </li>
-<li>
-<p><strong>Example 3: Complex Graph with Cycles</strong></p>
-</li>
 </ol>
+<p><strong>Example 3: Complex Graph with Cycles</strong></p>
 <p>For a more complex circuit containing cycles, the algorithm uses <strong>depth-first search (DFS)</strong> or <strong>breadth-first search (BFS)</strong> techniques to identify cycles and simplify the circuit. By detecting these cycles, the algorithm can apply Kirchhoff's laws or reduction techniques, recursively simplifying the circuit until it converges to a single equivalent resistance.</p>
 <p>The algorithm is designed to handle these cycles efficiently and compute the final equivalent resistance using graph traversal methods.</p>
 <hr/>
