@@ -56,7 +56,48 @@ T^2 = \frac{4\pi^2}{G M} r^3
 
 ---
 
-### 2. Implications for Astronomy
+### 2. Python Implementation for Simulations
+
+Below is a Python script to simulate the relationship between orbital period and radius for circular orbits:
+
+<details>
+<summary>Click to expand Python code</summary>
+
+```python
+# filepath: /simulations/keplers_law_simulation.py
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+G = 6.67430e-11  # Gravitational constant (m^3 kg^-1 s^-2)
+M = 5.972e24     # Mass of Earth (kg)
+
+# Orbital radii (in meters)
+radii = np.linspace(1e7, 5e8, 100)
+# Periods from Kepler's Third Law
+periods = 2 * np.pi * np.sqrt(radii**3 / (G * M))
+
+# Plot T^2 vs r^3
+plt.figure(figsize=(8, 5))
+plt.plot(radii**3, periods**2, label='T² vs r³', color='blue')
+plt.xlabel('r³ (m³)')
+plt.ylabel('T² (s²)')
+plt.title("Verification of Kepler's Third Law")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+
+# Save the figure as a PNG image
+plt.savefig("keplers_law_plot.png", dpi=300)
+
+# Optionally display it
+plt.show()
+```
+</details>
+
+---
+
+### 3. Implications for Astronomy
 
 - This relationship allows astronomers to:
   - Determine the **mass of a central body** (e.g., a star or planet) by observing the motion of orbiting objects.
@@ -67,7 +108,7 @@ T^2 = \frac{4\pi^2}{G M} r^3
 
 ---
 
-### 3. Real-World Examples
+### 4. Real-World Examples
 
 #### Example 1: Moon’s Orbit Around Earth
 
@@ -93,7 +134,7 @@ These values align with Kepler’s Law and confirm its consistency across vastly
 
 ---
 
-### 4. Computational Model Output
+### 5. Computational Model Output
 
 📷 **Kepler's Third Law: Simulation Plot**
 
