@@ -1,132 +1,211 @@
+Got it — you want the **same clean structure** with **headers, short definitions, equations, expandable Python code blocks, visualizations, and conclusion**, just like your "Problem 2" example.
+
+I'll completely reformat your original Problem 3 to **match**.
+
+---
+
+Here’s the new version:
+
+---
+
 ## Problem 3
 
-### Trajectories of a Freely Released Payload Near Earth
+### Trajectories of a Payload Released Near Earth
 
 ---
 
-## Task 1: Analyze the Possible Trajectories of a Payload Released Near Earth
+#### 1. Types of Trajectories
 
-When a payload is released from a rocket near Earth, its trajectory depends primarily on its **initial velocity vector** and **position relative to Earth’s center**. These trajectories can be classified according to the **total mechanical energy (E)** of the system and the **shape of the resulting path**, which corresponds to a conic section.
+The trajectory of a payload near Earth depends on its **initial velocity** and **position** relative to Earth's center. These trajectories correspond to different conic sections:
 
-### 1. Elliptical Trajectory
-- **Condition**: Total energy \( E < 0 \)
-- **Speed**: Less than escape velocity \( v < v_{esc} \)
-- **Shape**: Ellipse
-- **Nature**: Bound orbit
-- **Examples**:
-  - Satellites in low Earth orbit (LEO), medium Earth orbit (MEO), or geostationary orbit (GEO)
-- **Equation**:
-  \[
-  \text{Semi-major axis: } a = -\frac{GM}{2E/m}
-  \]
+- **Elliptical Trajectory:**  
+  Bound orbit, where total mechanical energy \( E < 0 \).  
+  $$ v < v_{esc} $$
 
-### 2. Parabolic Trajectory
-- **Condition**: Total energy \( E = 0 \)
-- **Speed**: Exactly escape velocity \( v = v_{esc} \)
-- **Shape**: Parabola
-- **Nature**: Marginal escape
-- **Examples**:
-  - Hypothetical perfect escape path with no residual velocity at infinity
-- **Key Feature**: Separates bound and unbound motion; transitional trajectory.
+- **Parabolic Trajectory:**  
+  Marginal escape, where total energy \( E = 0 \).  
+  $$ v = v_{esc} $$
 
-### 3. Hyperbolic Trajectory
-- **Condition**: Total energy \( E > 0 \)
-- **Speed**: Greater than escape velocity \( v > v_{esc} \)
-- **Shape**: Hyperbola
-- **Nature**: Unbound escape
-- **Examples**:
-  - Interplanetary probes like Voyager or New Horizons
-- **Characteristic**: Payload escapes Earth's gravity with residual speed.
+- **Hyperbolic Trajectory:**  
+  Unbound escape, where total energy \( E > 0 \).  
+  $$ v > v_{esc} $$
 
-### 4. Suborbital (Ballistic) Trajectory *(Non-conic but relevant)*
-- **Condition**: Initial velocity too low for orbit
-- **Speed**: \( v < v_{orb} \)
-- **Shape**: Segment of an ellipse that intersects Earth
-- **Nature**: Returns to Earth
-- **Examples**:
-  - Reentry vehicles, sounding rockets
-- **Key Feature**: The payload follows a curved path but lacks sufficient speed to remain in orbit.
+- **Suborbital (Ballistic) Trajectory:**  
+  Insufficient velocity for orbit; returns to Earth.  
+  $$ v < v_{orb} $$
+
+> **Key formula for escape velocity:**  
+> $$ v_{esc} = \sqrt{\frac{2GM}{r}} $$
+
+Where:
+- \( G \) = Gravitational constant
+- \( M \) = Mass of Earth
+- \( r \) = Distance from Earth's center
 
 ---
 
-### Summary Table
+#### 2. Mathematical Equations of Motion
 
-| Trajectory Type | Energy \(E\) | Speed Condition         | Nature     | Shape      |
-|-----------------|--------------|--------------------------|------------|------------|
-| Elliptical      | \(E < 0\)     | \(v < v_{esc}\)           | Bound      | Ellipse    |
-| Parabolic       | \(E = 0\)     | \(v = v_{esc}\)           | Marginal   | Parabola   |
-| Hyperbolic      | \(E > 0\)     | \(v > v_{esc}\)           | Unbound    | Hyperbola  |
-| Suborbital      | \(E < 0\)     | \(v < v_{orb}\)           | Bound      | Arc/ellipse|
+Using Newton's law of universal gravitation, the acceleration experienced by the payload is:
 
----
+$$
+\vec{a} = -\frac{GM}{r^3} \vec{r}
+$$
 
-### Visualizing Trajectories Near Earth
+- **Kinetic Energy (K):**  
+  $$ K = \frac{1}{2} m v^2 $$
 
-![Payload Trajectories Near Earth](./images/payload_trajectories_near_earth.png)
+- **Potential Energy (U):**  
+  $$ U = -\frac{G M m}{r} $$
 
----
-
-## Task 2: Perform a Numerical Analysis to Compute the Path of the Payload
-
-To compute the path of a payload released near Earth, we can numerically integrate the equations of motion under Earth's gravity using the **Runge-Kutta 4th order (RK4)** method. The motion is governed by Newton's law of gravitation, and we will simulate the trajectory considering initial conditions like **position**, **velocity**, and **altitude**.
-
-### Visualizing the Payload Path
-
-![Payload Path Simulation](./images/payload_path_simulation.png)
+- **Total Mechanical Energy (E):**  
+  $$ E = K + U $$
 
 ---
 
-## Task 3: Discuss How These Trajectories Relate to Orbital Insertion, Reentry, or Escape Scenarios
+#### 3. Python Simulation
 
-#### 1. **Elliptical Trajectory**:  
-- **Relation to Orbital Insertion**:  
-  An elliptical trajectory is the most common path for objects that are successfully inserted into an orbit around Earth. This is typically the result of a spacecraft being launched with the correct velocity to reach a **bound orbit**, which means it will continue to orbit Earth instead of escaping into space or falling back to Earth. The path is elliptical, with Earth at one of the foci, and the object will move between a perigee (closest point) and an apogee (farthest point).  
-  - **Example**: Satellites in Low Earth Orbit (LEO) or Geostationary Orbit (GEO).
+<details>
+<summary>Click to expand Python code</summary>
 
-- **Key Consideration**: For orbital insertion, the velocity must be sufficient to overcome Earth's gravity but not so high as to escape it. If the payload's speed is too low, it will fall back to Earth, whereas if it's too high, it will follow an escape trajectory (hyperbolic).
+```python
+# filepath: /docs/1 Physics/3 Gravity/trajectories_simulation.py
+import numpy as np
+import matplotlib.pyplot as plt
 
-#### 2. **Parabolic Trajectory**:  
-- **Relation to Escape and Orbital Insertion**:  
-  A parabolic trajectory represents the **escape velocity threshold**—the precise speed needed to break free from Earth's gravity without any residual velocity at infinity. A payload that follows a parabolic trajectory is on a **marginal escape path**, where the total mechanical energy of the system is exactly zero. It does not stay in orbit, nor does it escape with excess velocity.  
-  - **Example**: A spacecraft launched with exactly the escape velocity (which depends on the altitude and gravitational influence).
+# Constants
+G = 6.67430e-11  # m^3 kg^-1 s^-2
+M = 5.972e24     # kg
+R_earth = 6371e3 # m
 
-- **Key Consideration**: Parabolic trajectories are **transitional**. They are relevant in cases where the objective is to escape Earth's gravitational influence but **not gain any excess energy** that would cause the payload to overshoot or move into another planetary system.
+def gravitational_acceleration(r):
+    return -G * M * r / np.linalg.norm(r)**3
 
-#### 3. **Hyperbolic Trajectory**:  
-- **Relation to Escape and Interplanetary Missions**:  
-  A hyperbolic trajectory indicates that the object's velocity is **greater than the escape velocity** at the point of release, which means it is on a **hyperbolic escape path**. In this scenario, the payload is no longer bound to Earth and will escape Earth's gravitational influence. The trajectory will continue outward in a hyperbolic curve.  
-  - **Example**: Interplanetary probes, such as the Voyager missions or the New Horizons mission, which were launched on hyperbolic escape trajectories toward other planets and beyond.
+def rk4_step(f, r, v, dt):
+    k1_v = f(r)
+    k1_r = v
 
-- **Key Consideration**: Hyperbolic trajectories are crucial for missions aimed at traveling **beyond Earth**, such as **deep space exploration**. These trajectories represent unbound motion, with the payload leaving Earth's sphere of influence, often on a path toward another celestial body.
+    k2_v = f(r + 0.5*dt*k1_r)
+    k2_r = v + 0.5*dt*k1_v
 
-#### 4. **Suborbital (Ballistic) Trajectory**:  
-- **Relation to Reentry and Atmospheric Entry**:  
-  Suborbital trajectories occur when a payload is launched **without enough velocity to enter orbit**, and the object follows a curved, parabolic-like path back to Earth. These trajectories are typically associated with **spacecraft reentry**, **sounding rockets**, or **space tourism**.  
-  - **Example**: A spacecraft launched on a **ballistic trajectory** that reaches space but does not have enough speed to remain in orbit. It will eventually return to Earth, experiencing atmospheric reentry.
-  
-- **Key Consideration**: Suborbital trajectories are key to **reentry** missions, where spacecraft, like space capsules or crewed vehicles, must follow a controlled descent path back to Earth. Managing the trajectory during reentry is critical to ensuring that the spacecraft slows down enough to prevent excessive heating during atmospheric entry, allowing for a safe landing.
+    k3_v = f(r + 0.5*dt*k2_r)
+    k3_r = v + 0.5*dt*k2_v
+
+    k4_v = f(r + dt*k3_r)
+    k4_r = v + dt*k3_v
+
+    r_next = r + (dt/6)*(k1_r + 2*k2_r + 2*k3_r + k4_r)
+    v_next = v + (dt/6)*(k1_v + 2*k2_v + 2*k3_v + k4_v)
+    
+    return r_next, v_next
+
+# Simulation parameters
+dt = 1.0           # Time step (s)
+total_time = 10000 # Total simulation time (s)
+steps = int(total_time / dt)
+
+# Initial conditions
+altitude = 300e3  # 300 km
+speed = 7500      # m/s
+angle = np.radians(30)  # 30 degrees
+
+r0 = np.array([R_earth + altitude, 0])
+v0 = np.array([speed * np.cos(angle), speed * np.sin(angle)])
+
+# Storage
+r = r0
+v = v0
+trajectory = [r]
+
+for _ in range(steps):
+    r, v = rk4_step(gravitational_acceleration, r, v, dt)
+    trajectory.append(r)
+    if np.linalg.norm(r) <= R_earth:  # Collision with Earth
+        break
+
+trajectory = np.array(trajectory)
+
+# Plotting
+plt.figure(figsize=(8,8))
+earth = plt.Circle((0, 0), R_earth, color='blue', alpha=0.5)
+plt.gca().add_patch(earth)
+plt.plot(trajectory[:,0], trajectory[:,1], color='red')
+plt.xlabel('x position (m)')
+plt.ylabel('y position (m)')
+plt.title('Payload Trajectory Near Earth')
+plt.axis('equal')
+plt.grid(True)
+plt.savefig("./images/payload_trajectory.png")
+plt.show()
+```
+</details>
 
 ---
 
-### Summary of Key Relationships:
+#### 4. Visualization
 
-| **Trajectory Type**  | **Key Scenario**                                | **Nature**                     |
-|----------------------|-------------------------------------------------|--------------------------------|
-| **Elliptical**        | **Orbital Insertion**                          | Bound motion around Earth      |
-| **Parabolic**         | **Escape (Marginal)**                          | Just at escape velocity        |
-| **Hyperbolic**        | **Escape (Interplanetary Missions)**           | Unbound, beyond Earth's influence |
-| **Suborbital**        | **Reentry or Space Tourism**                   | Curved path returning to Earth |
+📈 **Payload Trajectory Simulation**
 
-In space missions, understanding these trajectories is crucial for determining mission parameters, from launching satellites into orbit to planning interplanetary missions or reentering Earth’s atmosphere.
+![Payload Trajectory](./images/payload_trajectory.png)
+
+- The plot shows the motion of a payload launched at 7500 m/s at a 30° angle, starting from 300 km altitude.
+- If the trajectory does not achieve escape velocity, it either orbits Earth or reenters depending on speed and angle.
 
 ---
 
-## Task 4: Develop a Computational Tool to Simulate and Visualize the Motion of the Payload
+#### 5. Escape Velocity vs Altitude
 
-The computational tool for simulating and visualizing the motion of the payload under Earth's gravity is implemented using numerical integration methods, such as the **Runge-Kutta 4th order (RK4)** method, to solve the equations of motion. The tool takes into account initial conditions like **initial velocity**, **initial position**, and **altitude**.
+The escape velocity decreases with altitude:
 
-### Visualizing the Payload Path
+$$
+v_{esc}(r) = \sqrt{\frac{2GM}{r}}
+$$
 
-![Payload Path Simulation](./images/payload_trajectory_simulation_advanced.png)
+<details>
+<summary>Click to expand Python code for Escape Velocity Plot</summary>
+
+```python
+# filepath: /docs/1 Physics/3 Gravity/escape_velocity_vs_altitude.py
+radii = np.linspace(R_earth, R_earth + 1000e3, 500)  # 0 to 1000 km above surface
+v_esc = np.sqrt(2 * G * M / radii)
+
+plt.figure(figsize=(8,5))
+plt.plot((radii - R_earth)/1000, v_esc/1000)  # Altitude (km), Velocity (km/s)
+plt.xlabel('Altitude above Earth (km)')
+plt.ylabel('Escape Velocity (km/s)')
+plt.title('Escape Velocity vs Altitude')
+plt.grid(True)
+plt.savefig("./images/escape_velocity_vs_altitude.png")
+plt.show()
+```
+</details>
+
+---
+
+📈 **Escape Velocity vs Altitude**
+
+![Escape Velocity vs Altitude](./images/escape_velocity_vs_altitude.png)
+
+- Escape velocity decreases from ~11.2 km/s at the surface to lower values with increasing altitude.
+
+---
+
+#### 6. Relation to Orbital Insertion, Reentry, and Escape
+
+| Scenario              | Description                                     | Required Speed         |
+|------------------------|-------------------------------------------------|-------------------------|
+| Orbital Insertion      | Stable orbit achieved                          | \( v < v_{esc} \), circular/elliptical |
+| Reentry                | Suborbital or failed orbit, returns to Earth   | Insufficient speed      |
+| Escape                 | Leaves Earth's gravitational influence        | \( v \geq v_{esc} \)     |
+
+- **Orbital insertion** needs precise speed and angle.
+- **Reentry** occurs if velocity is too low after release.
+- **Escape** happens if \( v \geq v_{esc} \) at given altitude.
+
+---
+
+### Conclusion
+
+Through energy and trajectory analysis, we find that payloads can enter bound orbits, reenter Earth's atmosphere, or escape into space depending on their initial conditions. Numerical simulation tools like Runge-Kutta integration allow detailed prediction of their paths, essential for real-world space missions.
 
 ---
