@@ -401,8 +401,12 @@ B = \frac{A}{\sqrt{(\omega_0^2 - \omega_d^2)^2 + b^2\omega_d^2}} \\
    Introduce damping proportional to <span class="arithmatex">\( \omega^2 \)</span> or a combination of linear and quadratic terms:</li>
 </ol>
 <p>[
-   \frac{d^2\theta}{dt^2} + (b_1 \omega + b_2 \omega^2) + \frac{g}{L} \sin(\theta) = A \cos(\omega_d t)
+   \frac{d^2\theta}{dt^2} + \left(b_1 \frac{d\theta}{dt} + b_2 \left(\frac{d\theta}{dt}\right)^2\right) + \frac{g}{L} \sin(\theta) = A \cos(\omega_d t)
    ]</p>
+<p>Here:
+   - <span class="arithmatex">\( b_1 \)</span>: Linear damping coefficient (proportional to velocity).
+   - <span class="arithmatex">\( b_2 \)</span>: Nonlinear damping coefficient (proportional to the square of velocity).
+   - The term <span class="arithmatex">\( b_2 \left(\frac{d\theta}{dt}\right)^2 \)</span> accounts for effects like air resistance at higher speeds.</p>
 <ol>
 <li><strong>Non-Periodic or Stochastic Forcing</strong><br/>
    Replace the cosine term with:</li>
