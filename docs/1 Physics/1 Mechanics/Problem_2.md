@@ -23,7 +23,86 @@ This is **nonlinear**, **non-autonomous**, and **second-order**, with:
 
 ---
 
-### **2. Linearized Case (Small-Angle Approximation)**
+### **2. Python Implementation for Simulations**
+
+Below is a Python script to simulate the forced damped pendulum and generate phase portraits, Poincaré sections, and bifurcation diagrams.
+
+<details>
+<summary>Click to expand Python code</summary>
+
+```python
+# filepath: /simulations/forced_damped_pendulum.py
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Parameters
+g = 9.81  # gravitational acceleration (m/s^2)
+L = 1.0   # length of pendulum (m)
+b = 0.5   # damping coefficient
+A = 1.5   # driving amplitude
+omega_d = 2.0  # driving frequency
+
+# Define the ODE system
+def forced_damped_pendulum(t, y, b, g, L, A, omega_d):
+    theta, omega = y
+    dydt = [omega, -b * omega - (g / L) * np.sin(theta) + A * np.cos(omega_d * t)]
+    return dydt
+
+# Solve the ODE
+t_span = (0, 50)
+y0 = [0.1, 0]  # initial conditions: [theta, omega]
+t_eval = np.linspace(t_span[0], t_span[1], 1000)
+sol = solve_ivp(forced_damped_pendulum, t_span, y0, t_eval=t_eval, args=(b, g, L, A, omega_d))
+
+# Extract results
+theta = sol.y[0]
+omega = sol.y[1]
+time = sol.t
+
+# Plot Phase Portrait
+plt.figure(figsize=(8, 6))
+plt.plot(theta, omega, label="Phase Portrait")
+plt.xlabel("Theta (rad)")
+plt.ylabel("Angular Velocity (rad/s)")
+plt.title("Phase Portrait of Forced Damped Pendulum")
+plt.legend()
+plt.grid()
+plt.show()
+
+# Poincaré Section
+poincare_theta = theta[::50]
+poincare_omega = omega[::50]
+plt.figure(figsize=(8, 6))
+plt.scatter(poincare_theta, poincare_omega, s=10, label="Poincaré Section")
+plt.xlabel("Theta (rad)")
+plt.ylabel("Angular Velocity (rad/s)")
+plt.title("Poincaré Section of Forced Damped Pendulum")
+plt.legend()
+plt.grid()
+plt.show()
+
+# Bifurcation Diagram (varying driving amplitude)
+amplitudes = np.linspace(0.5, 2.5, 50)
+bifurcation_data = []
+for A in amplitudes:
+    sol = solve_ivp(forced_damped_pendulum, t_span, y0, t_eval=t_eval, args=(b, g, L, A, omega_d))
+    bifurcation_data.append(sol.y[0][-100:])  # last 100 points
+
+plt.figure(figsize=(8, 6))
+for i, A in enumerate(amplitudes):
+    plt.scatter([A] * len(bifurcation_data[i]), bifurcation_data[i], s=1, color="blue")
+plt.xlabel("Driving Amplitude (A)")
+plt.ylabel("Theta (rad)")
+plt.title("Bifurcation Diagram of Forced Damped Pendulum")
+plt.grid()
+plt.show()
+```
+</details>
+
+---
+
+### **3. Linearized Case (Small-Angle Approximation)**
 
 For small oscillations \( \theta \ll 1 \), we use:
 
@@ -84,7 +163,7 @@ B = \frac{A}{\sqrt{(\omega_0^2 - \omega_d^2)^2 + b^2\omega_d^2}} \\
 
 ---
 
-### **3. Resonance Behavior**
+### **4. Resonance Behavior**
 
 - Resonance occurs when the driving frequency \( \omega_d \) is near the natural frequency \( \omega_0 \)
 - The system’s response peaks when:
@@ -97,7 +176,7 @@ The amplitude increases dramatically unless damping \( b \) is large.
 
 ---
 
-### **4. Numerical and Chaotic Solutions (Full Nonlinear Case)**
+### **5. Numerical and Chaotic Solutions (Full Nonlinear Case)**
 
 For larger amplitudes, the small-angle approximation breaks down, and **nonlinear effects dominate**, especially when:
 - \( A \) is large (strong driving)
@@ -116,7 +195,7 @@ These must be analyzed using:
 
 ---
 
-### **5. Summary of Behavior by Regime**
+### **6. Summary of Behavior by Regime**
 
 | Regime                   | Behavior                      | Solution Type                   |
 |--------------------------|-------------------------------|----------------------------------|
