@@ -241,8 +241,13 @@ The plots below show the angular motion of the forced damped pendulum under vari
    Introduce damping proportional to \( \omega^2 \) or a combination of linear and quadratic terms:
 
    \[
-   \frac{d^2\theta}{dt^2} + (b_1 \omega + b_2 \omega^2) + \frac{g}{L} \sin(\theta) = A \cos(\omega_d t)
+   \frac{d^2\theta}{dt^2} + \left(b_1 \frac{d\theta}{dt} + b_2 \left(\frac{d\theta}{dt}\right)^2\right) + \frac{g}{L} \sin(\theta) = A \cos(\omega_d t)
    \]
+
+   Here:
+   - \( b_1 \): Linear damping coefficient (proportional to velocity).
+   - \( b_2 \): Nonlinear damping coefficient (proportional to the square of velocity).
+   - The term \( b_2 \left(\frac{d\theta}{dt}\right)^2 \) accounts for effects like air resistance at higher speeds.
 
 2. **Non-Periodic or Stochastic Forcing**  
    Replace the cosine term with:
