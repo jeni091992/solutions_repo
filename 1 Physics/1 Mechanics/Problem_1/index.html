@@ -62,7 +62,15 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#4-implementation-in-python">4. Implementation in Python</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#graphical-representation">Graphical Representation</a>
+<li class="toctree-l3"><a class="reference internal" href="#5-graphical-representation">5. Graphical Representation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#6-discussion-on-limitations-and-realistic-factors">6. Discussion on Limitations and Realistic Factors</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#limitations-of-the-idealized-model">Limitations of the Idealized Model</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#suggestions-for-incorporating-realistic-factors">Suggestions for Incorporating Realistic Factors</a>
+</li>
+</ul>
 </li>
 </ul>
 </li>
@@ -257,10 +265,11 @@ ranges[np.isclose(angles, 90)] = 0  # Set range to 0 for 90 degrees
 
 # Plot
 plt.figure(figsize=(8, 6))
-plt.plot(angles, ranges)
+plt.plot(angles, ranges, label=f"v0 = {v0} m/s, g = {g} m/s²")
 plt.title("Range vs Angle of Projection")
 plt.xlabel("Angle (degrees)")
 plt.ylabel("Range (meters)")
+plt.legend()
 plt.grid()
 
 # Save the plot as an image
@@ -268,9 +277,27 @@ plt.savefig("range_vs_angle.png", dpi=300)  # Save as PNG with high resolution
 plt.show()
 </code></pre>
 </details>
-<h3 id="graphical-representation">Graphical Representation</h3>
+<hr/>
+<h3 id="5-graphical-representation"><strong>5. Graphical Representation</strong></h3>
 <p>Below is the graph showing the relationship between the range and the angle of projection:</p>
 <p><img alt="Range vs Angle of Projection" src="../images/range_vs_angle.png"/></p>
+<hr/>
+<h3 id="6-discussion-on-limitations-and-realistic-factors"><strong>6. Discussion on Limitations and Realistic Factors</strong></h3>
+<h4 id="limitations-of-the-idealized-model"><strong>Limitations of the Idealized Model</strong></h4>
+<ol>
+<li><strong>No Air Resistance:</strong> The model assumes no air resistance, which is unrealistic for most real-world scenarios. Air resistance reduces the range and makes the trajectory asymmetric.</li>
+<li><strong>Constant Gravitational Acceleration:</strong> The model assumes <span class="arithmatex">\( g \)</span> is constant, which is valid only for small distances near the Earth's surface.</li>
+<li><strong>No Wind Effects:</strong> Wind can significantly alter the trajectory, either increasing or decreasing the range depending on its direction.</li>
+<li><strong>Point Mass Assumption:</strong> The projectile is treated as a point mass, ignoring factors like shape, size, and spin.</li>
+</ol>
+<h4 id="suggestions-for-incorporating-realistic-factors"><strong>Suggestions for Incorporating Realistic Factors</strong></h4>
+<ol>
+<li><strong>Air Resistance:</strong> Introduce drag force proportional to the velocity squared, <span class="arithmatex">\( F_d = -c_d v^2 \)</span>, where <span class="arithmatex">\( c_d \)</span> is the drag coefficient.</li>
+<li><strong>Variable Gravity:</strong> For large distances, use <span class="arithmatex">\( g = \frac{GM}{(R+h)^2} \)</span>, where <span class="arithmatex">\( h \)</span> is the height above the Earth's surface.</li>
+<li><strong>Wind Effects:</strong> Add a horizontal force term to account for wind velocity.</li>
+<li><strong>Projectile Shape and Spin:</strong> Include lift and Magnus forces for spinning projectiles.</li>
+</ol>
+<p>By incorporating these factors, the model can better represent real-world scenarios, though at the cost of increased computational complexity.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
