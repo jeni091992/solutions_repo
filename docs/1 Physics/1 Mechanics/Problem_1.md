@@ -90,10 +90,11 @@ ranges[np.isclose(angles, 90)] = 0  # Set range to 0 for 90 degrees
 
 # Plot
 plt.figure(figsize=(8, 6))
-plt.plot(angles, ranges)
+plt.plot(angles, ranges, label=f"v0 = {v0} m/s, g = {g} m/s²")
 plt.title("Range vs Angle of Projection")
 plt.xlabel("Angle (degrees)")
 plt.ylabel("Range (meters)")
+plt.legend()
 plt.grid()
 
 # Save the plot as an image
@@ -103,8 +104,28 @@ plt.show()
 
 </details>
 
-### Graphical Representation
+---
+
+### **5. Graphical Representation**
 
 Below is the graph showing the relationship between the range and the angle of projection:
 
 ![Range vs Angle of Projection](./images/range_vs_angle.png)
+
+---
+
+### **6. Discussion on Limitations and Realistic Factors**
+
+#### **Limitations of the Idealized Model**
+1. **No Air Resistance:** The model assumes no air resistance, which is unrealistic for most real-world scenarios. Air resistance reduces the range and makes the trajectory asymmetric.
+2. **Constant Gravitational Acceleration:** The model assumes \( g \) is constant, which is valid only for small distances near the Earth's surface.
+3. **No Wind Effects:** Wind can significantly alter the trajectory, either increasing or decreasing the range depending on its direction.
+4. **Point Mass Assumption:** The projectile is treated as a point mass, ignoring factors like shape, size, and spin.
+
+#### **Suggestions for Incorporating Realistic Factors**
+1. **Air Resistance:** Introduce drag force proportional to the velocity squared, \( F_d = -c_d v^2 \), where \( c_d \) is the drag coefficient.
+2. **Variable Gravity:** For large distances, use \( g = \frac{GM}{(R+h)^2} \), where \( h \) is the height above the Earth's surface.
+3. **Wind Effects:** Add a horizontal force term to account for wind velocity.
+4. **Projectile Shape and Spin:** Include lift and Magnus forces for spinning projectiles.
+
+By incorporating these factors, the model can better represent real-world scenarios, though at the cost of increased computational complexity.
