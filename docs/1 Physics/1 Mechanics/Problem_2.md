@@ -247,9 +247,10 @@ $$
 
 
    Here:
-   - \( b_1 \): Linear damping coefficient (proportional to velocity).
-   - \( b_2 \): Nonlinear damping coefficient (proportional to the square of velocity).
-   - The term \( b_2 \left(\frac{d\theta}{dt}\right)^2 \) accounts for effects like air resistance at higher speeds.
+- \( b_1 \): Linear damping coefficient (proportional to velocity).
+- \( b_2 \): Nonlinear damping coefficient (proportional to the square of velocity).
+- The term \( b_2 \left( \frac{d\theta}{dt} \right)^2 \) accounts for effects like air resistance at higher speeds.
+
 
 2. **Non-Periodic or Stochastic Forcing**  
    Replace the cosine term with:
