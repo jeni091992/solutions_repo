@@ -297,40 +297,62 @@ def find_parallel_nodes(circuit_graph):
 <h4 id="4-test-cases-and-examples">4. Test Cases and Examples</h4>
 <ul>
 <li><strong>Example 1: Simple Series and Parallel Combinations</strong></li>
-<li>For a circuit with two resistors in series <span class="arithmatex">\( R_1 = 10 \, \Omega \)</span> and <span class="arithmatex">\( R_2 = 5 \, \Omega \)</span>, the algorithm will compute:
-    $$
-    R_{\text{eq}} = R_1 + R_2 = 10 + 5 = 15 \, \Omega
-    $$</li>
+</ul>
+<p>Consider a circuit with two resistors <span class="arithmatex">\( R_1 = 10 \, \Omega \)</span> and <span class="arithmatex">\( R_2 = 5 \, \Omega \)</span>.</p>
+<ol>
 <li>
-<p>For a circuit with two resistors in parallel <span class="arithmatex">\( R_1 = 10 \, \Omega \)</span> and <span class="arithmatex">\( R_2 = 5 \, \Omega \)</span>, the algorithm will compute:
-    $$
-    R_{\text{eq}} = \frac{R_1 \cdot R_2}{R_1 + R_2} = \frac{10 \cdot 5}{10 + 5} = \frac{50}{15} = 3.33 \, \Omega
-    $$</p>
+<p><strong>Series Combination</strong>:<br/>
+     The total resistance for resistors in series is simply the sum:
+     $$
+     R_{\text{eq}} = R_1 + R_2 = 10 + 5 = 15 \, \Omega
+     $$</p>
+</li>
+<li>
+<p><strong>Parallel Combination</strong>:<br/>
+     The total resistance for resistors in parallel is given by the formula:
+     $$
+     R_{\text{eq}} = \frac{R_1 \cdot R_2}{R_1 + R_2} = \frac{10 \cdot 5}{10 + 5} = \frac{50}{15} = 3.33 \, \Omega
+     $$</p>
 </li>
 <li>
 <p><strong>Example 2: Nested Configurations</strong></p>
 </li>
+</ol>
+<p>Consider a circuit with:
+  - <span class="arithmatex">\( R_1 = 10 \, \Omega \)</span>, <span class="arithmatex">\( R_2 = 5 \, \Omega \)</span> in series, and
+  - <span class="arithmatex">\( R_3 = 15 \, \Omega \)</span> in parallel with the series combination of <span class="arithmatex">\( R_1 \)</span> and <span class="arithmatex">\( R_2 \)</span>.</p>
+<ol>
 <li>
-<p>A circuit where resistors are first simplified in series and then in parallel will be handled by recursively applying the series and parallel reduction steps until only one equivalent resistance remains.</p>
+<p><strong>Simplify Series Combination</strong>:<br/>
+     $$
+     R_{\text{series}} = R_1 + R_2 = 10 + 5 = 15 \, \Omega
+     $$</p>
+</li>
+<li>
+<p><strong>Simplify Parallel Combination with <span class="arithmatex">\( R_3 \)</span></strong>:<br/>
+     $$
+     \frac{1}{R_{\text{eq}}} = \frac{1}{R_{\text{series}}} + \frac{1}{R_3} = \frac{1}{15} + \frac{1}{15} = \frac{2}{15} \quad \Rightarrow \quad R_{\text{eq}} = 7.5 \, \Omega
+     $$</p>
 </li>
 <li>
 <p><strong>Example 3: Complex Graph with Cycles</strong></p>
 </li>
-<li>For more complex circuits with cycles and multiple resistors, the algorithm will use depth-first or breadth-first search techniques to simplify the circuit and compute the final equivalent resistance.</li>
-</ul>
+</ol>
+<p>For a more complex circuit containing cycles, the algorithm uses <strong>depth-first search (DFS)</strong> or <strong>breadth-first search (BFS)</strong> techniques to identify cycles and simplify the circuit. By detecting these cycles, the algorithm can apply Kirchhoff's laws or reduction techniques, recursively simplifying the circuit until it converges to a single equivalent resistance.</p>
+<p>The algorithm is designed to handle these cycles efficiently and compute the final equivalent resistance using graph traversal methods.</p>
 <hr/>
 <h4 id="5-efficiency-and-potential-improvements">5. Efficiency and Potential Improvements</h4>
 <ul>
 <li><strong>Efficiency:</strong></li>
-<li>The algorithm performs well for small to moderately complex circuits. It iteratively reduces the graph, simplifying series and parallel connections.</li>
+<li>The algorithm works efficiently for small to moderately complex circuits by iteratively simplifying series and parallel resistor combinations.</li>
 <li>
-<p>As the number of resistors and connections grows, the time complexity may increase, as each step involves checking the graph for series or parallel connections.</p>
+<p>For very large circuits, the complexity may increase as each simplification step involves checking the graph for series and parallel connections, which could be computationally expensive.</p>
 </li>
 <li>
 <p><strong>Potential Improvements:</strong></p>
 </li>
-<li><strong>Cycle Detection:</strong> For circuits with multiple loops, a more advanced approach for cycle detection (e.g., using Kirchhoff's circuit laws or a specialized algorithm for detecting cycles) could optimize the process.</li>
-<li><strong>Graph Representation:</strong> Optimizing the graph representation (e.g., using adjacency lists or matrices) could improve the efficiency of graph traversal.</li>
+<li><strong>Cycle Detection:</strong> For circuits with multiple loops, advanced cycle detection techniques (e.g., using Kirchhoff’s circuit laws) could further optimize the simplification process.</li>
+<li><strong>Graph Representation:</strong> Optimizing the graph representation (e.g., using adjacency lists or matrices) could improve the efficiency of graph traversal and make the overall process faster.</li>
 </ul>
 <hr/>
 <h3 id="conclusion">Conclusion</h3>
