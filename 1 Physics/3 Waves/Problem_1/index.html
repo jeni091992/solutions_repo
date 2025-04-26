@@ -66,6 +66,24 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#interference-patterns-on-a-water-surface">Interference Patterns on a Water Surface</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-wave-equations-and-superposition">1. Wave Equations and Superposition</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-mathematical-derivations">2. Mathematical Derivations</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-python-simulation">3. Python Simulation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#4-interference-patterns-and-analysis">4. Interference Patterns and Analysis</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#5-graphical-representation">5. Graphical Representation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#6-importance-of-wave-interference">6. Importance of Wave Interference</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -171,7 +189,149 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h2 id="problem-1">Problem 1</h2>
+<h3 id="interference-patterns-on-a-water-surface">Interference Patterns on a Water Surface</h3>
+<hr/>
+<h4 id="1-wave-equations-and-superposition">1. Wave Equations and Superposition</h4>
+<ul>
+<li><strong>Wave Equation for a Single Source:</strong><br/>
+  The displacement <span class="arithmatex">\( u \)</span> at a point <span class="arithmatex">\( (x, y) \)</span> on the water surface, due to a single point source located at <span class="arithmatex">\( (x_s, y_s) \)</span>, is given by the equation:<br/>
+  [
+  u(x, y, t) = A \cos(k \cdot r - \omega t + \phi)
+  ]
+  where:</li>
+<li><span class="arithmatex">\( A \)</span> is the amplitude of the wave.</li>
+<li><span class="arithmatex">\( k = \frac{2\pi}{\lambda} \)</span> is the wave number, with <span class="arithmatex">\( \lambda \)</span> being the wavelength.</li>
+<li><span class="arithmatex">\( \omega = 2\pi f \)</span> is the angular frequency, with <span class="arithmatex">\( f \)</span> being the frequency of the wave.</li>
+<li><span class="arithmatex">\( r = \sqrt{(x - x_s)^2 + (y - y_s)^2} \)</span> is the distance from the source to the observation point.</li>
+<li>
+<p><span class="arithmatex">\( \phi \)</span> is the initial phase.</p>
+</li>
+<li>
+<p><strong>Superposition Principle:</strong><br/>
+  When multiple sources emit waves, the total displacement at any point <span class="arithmatex">\( (x, y) \)</span> on the water surface is the sum of the displacements from all the sources:<br/>
+  [
+  u_{\text{total}}(x, y, t) = \sum_{i=1}^{N} A \cos(k \cdot r_i - \omega t + \phi_i)
+  ]
+  where <span class="arithmatex">\( N \)</span> is the number of sources (the vertices of the polygon), and <span class="arithmatex">\( r_i \)</span> is the distance from the point <span class="arithmatex">\( (x, y) \)</span> to the <span class="arithmatex">\( i \)</span>-th source.</p>
+</li>
+</ul>
+<hr/>
+<h4 id="2-mathematical-derivations">2. Mathematical Derivations</h4>
+<ul>
+<li><strong>Displacement for Multiple Sources:</strong><br/>
+  Given that the sources are placed at the vertices of a regular polygon, the resulting displacement at any point <span class="arithmatex">\( (x, y) \)</span> is the sum of the individual wave contributions from each vertex:
+  [
+  u_{\text{total}}(x, y, t) = \sum_{i=1}^{N} A \cos(k \cdot r_i - \omega t + \phi_i)
+  ]
+  where:</li>
+<li><span class="arithmatex">\( r_i = \sqrt{(x - x_s)^2 + (y - y_s)^2} \)</span> is the distance from the source at <span class="arithmatex">\( (x_s, y_s) \)</span> to the point <span class="arithmatex">\( (x, y) \)</span>.</li>
+<li><span class="arithmatex">\( N \)</span> is the number of vertices in the polygon, with the sources placed at equal angles.</li>
+</ul>
+<hr/>
+<h4 id="3-python-simulation">3. Python Simulation</h4>
+<details>
+<summary>Click to expand Python code</summary>
+<pre><code class="language-python"># filepath: /docs/1 Physics/2 Wave Interference/interference_pattern_simulation.py
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters for the wave
+A = 1.0           # Amplitude
+lambda_wave = 2.0  # Wavelength
+f = 1.0            # Frequency (Hz)
+omega = 2 * np.pi * f  # Angular frequency
+k = 2 * np.pi / lambda_wave  # Wave number
+phi = 0            # Initial phase
+
+# Number of sources (vertices of the polygon)
+N = 4  # For square (can change for other polygons)
+r = 5  # Distance from the center to each vertex
+
+# Function to generate the positions of the sources
+def get_source_positions(N, r):
+    angles = np.linspace(0, 2 * np.pi, N, endpoint=False)
+    positions = [(r * np.cos(angle), r * np.sin(angle)) for angle in angles]
+    return positions
+
+# Function to compute the displacement from a single wave source at (x_s, y_s)
+def wave_displacement(x, y, x_s, y_s, A, k, omega, t, phi):
+    r = np.sqrt((x - x_s)**2 + (y - y_s)**2)  # Distance from the source
+    return A * np.cos(k * r - omega * t + phi)
+
+# Function to compute total displacement due to superposition of waves from multiple sources
+def total_displacement(x, y, sources, A, k, omega, t, phi):
+    total_disp = 0
+    for (x_s, y_s) in sources:
+        total_disp += wave_displacement(x, y, x_s, y_s, A, k, omega, t, phi)
+    return total_disp
+
+# Generate the grid for the water surface
+x_vals = np.linspace(-10, 10, 400)
+y_vals = np.linspace(-10, 10, 400)
+X, Y = np.meshgrid(x_vals, y_vals)
+
+# Get the positions of the sources (vertices of the square)
+sources = get_source_positions(N, r)
+
+# Create an empty matrix for the displacement
+Z = np.zeros(X.shape)
+
+# Time array to animate the wave
+time = 0.0  # Set time for one snapshot of the pattern
+
+# Compute the displacement at each point on the grid
+for i in range(len(x_vals)):
+    for j in range(len(y_vals)):
+        Z[i, j] = total_displacement(X[i, j], Y[i, j], sources, A, k, omega, time, phi)
+
+# Plot the interference pattern (snapshot at time = 0)
+plt.figure(figsize=(8, 6))
+plt.contourf(X, Y, Z, 50, cmap='RdBu_r')
+plt.colorbar(label='Displacement')
+plt.title('Interference Pattern from 4 Point Sources (Square)')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.show()
+</code></pre>
+</details>
+<hr/>
+<h4 id="4-interference-patterns-and-analysis">4. Interference Patterns and Analysis</h4>
+<ul>
+<li>
+<p><strong>Constructive Interference:</strong><br/>
+  Constructive interference occurs when the waves from different sources meet in phase, leading to amplified displacement. These regions appear as peaks in the interference pattern.</p>
+</li>
+<li>
+<p><strong>Destructive Interference:</strong><br/>
+  Destructive interference happens when the waves from different sources meet out of phase, leading to cancellation. These regions appear as troughs or points of zero displacement in the interference pattern.</p>
+</li>
+<li>
+<p><strong>Effect of Source Configuration:</strong><br/>
+  The number and arrangement of sources (vertices of the polygon) will determine the pattern of constructive and destructive interference. A square configuration (4 sources) results in a symmetric pattern, while an equilateral triangle (3 sources) would create a different interference pattern with fewer peaks.</p>
+</li>
+</ul>
+<hr/>
+<h4 id="5-graphical-representation">5. Graphical Representation</h4>
+<p>📊 <strong>Interference Pattern from 4 Point Sources</strong></p>
+<p><img alt="Interference Pattern" src="./images/interference_pattern_square.png"/></p>
+<p><em>(The graph shows the resulting interference pattern from four point sources arranged in a square configuration.)</em></p>
+<hr/>
+<h4 id="6-importance-of-wave-interference">6. Importance of Wave Interference</h4>
+<ul>
+<li>
+<p><strong>Wave Superposition:</strong><br/>
+  The principle of superposition plays a crucial role in understanding how waves interact. It allows us to predict the resulting wave pattern from multiple sources.</p>
+</li>
+<li>
+<p><strong>Applications:</strong><br/>
+  Wave interference patterns are seen in various real-world scenarios, such as water waves, light waves, and sound waves. Understanding how these patterns form can be applied in areas such as acoustics, optics, and oceanography.</p>
+</li>
+</ul>
+<hr/>
+<h3 id="conclusion">Conclusion</h3>
+<p>By simulating and analyzing the interference patterns on a water surface due to waves from multiple sources, we gain valuable insights into the nature of wave superposition. The patterns of constructive and destructive interference provide a clear illustration of how waves combine, and they can be used to explore deeper principles in wave physics.</p>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
