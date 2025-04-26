@@ -111,32 +111,54 @@ def find_parallel_nodes(circuit_graph):
 #### 4. Test Cases and Examples
 
 - **Example 1: Simple Series and Parallel Combinations**
-  - For a circuit with two resistors in series \( R_1 = 10 \, \Omega \) and \( R_2 = 5 \, \Omega \), the algorithm will compute:
-    $$
-    R_{\text{eq}} = R_1 + R_2 = 10 + 5 = 15 \, \Omega
-    $$
-  - For a circuit with two resistors in parallel \( R_1 = 10 \, \Omega \) and \( R_2 = 5 \, \Omega \), the algorithm will compute:
-    $$
-    R_{\text{eq}} = \frac{R_1 \cdot R_2}{R_1 + R_2} = \frac{10 \cdot 5}{10 + 5} = \frac{50}{15} = 3.33 \, \Omega
-    $$
+
+  Consider a circuit with two resistors \( R_1 = 10 \, \Omega \) and \( R_2 = 5 \, \Omega \).
+
+  1. **Series Combination**:  
+     The total resistance for resistors in series is simply the sum:
+     $$
+     R_{\text{eq}} = R_1 + R_2 = 10 + 5 = 15 \, \Omega
+     $$
+
+  2. **Parallel Combination**:  
+     The total resistance for resistors in parallel is given by the formula:
+     $$
+     R_{\text{eq}} = \frac{R_1 \cdot R_2}{R_1 + R_2} = \frac{10 \cdot 5}{10 + 5} = \frac{50}{15} = 3.33 \, \Omega
+     $$
 
 - **Example 2: Nested Configurations**
-  - A circuit where resistors are first simplified in series and then in parallel will be handled by recursively applying the series and parallel reduction steps until only one equivalent resistance remains.
+
+  Consider a circuit with:
+  - \( R_1 = 10 \, \Omega \), \( R_2 = 5 \, \Omega \) in series, and
+  - \( R_3 = 15 \, \Omega \) in parallel with the series combination of \( R_1 \) and \( R_2 \).
+  
+  1. **Simplify Series Combination**:  
+     $$
+     R_{\text{series}} = R_1 + R_2 = 10 + 5 = 15 \, \Omega
+     $$
+
+  2. **Simplify Parallel Combination with \( R_3 \)**:  
+     $$
+     \frac{1}{R_{\text{eq}}} = \frac{1}{R_{\text{series}}} + \frac{1}{R_3} = \frac{1}{15} + \frac{1}{15} = \frac{2}{15} \quad \Rightarrow \quad R_{\text{eq}} = 7.5 \, \Omega
+     $$
 
 - **Example 3: Complex Graph with Cycles**
-  - For more complex circuits with cycles and multiple resistors, the algorithm will use depth-first or breadth-first search techniques to simplify the circuit and compute the final equivalent resistance.
+
+  For a more complex circuit containing cycles, the algorithm uses **depth-first search (DFS)** or **breadth-first search (BFS)** techniques to identify cycles and simplify the circuit. By detecting these cycles, the algorithm can apply Kirchhoff's laws or reduction techniques, recursively simplifying the circuit until it converges to a single equivalent resistance.
+
+  The algorithm is designed to handle these cycles efficiently and compute the final equivalent resistance using graph traversal methods.
 
 ---
 
 #### 5. Efficiency and Potential Improvements
 
 - **Efficiency:**
-  - The algorithm performs well for small to moderately complex circuits. It iteratively reduces the graph, simplifying series and parallel connections.
-  - As the number of resistors and connections grows, the time complexity may increase, as each step involves checking the graph for series or parallel connections.
+  - The algorithm works efficiently for small to moderately complex circuits by iteratively simplifying series and parallel resistor combinations.
+  - For very large circuits, the complexity may increase as each simplification step involves checking the graph for series and parallel connections, which could be computationally expensive.
 
 - **Potential Improvements:**
-  - **Cycle Detection:** For circuits with multiple loops, a more advanced approach for cycle detection (e.g., using Kirchhoff's circuit laws or a specialized algorithm for detecting cycles) could optimize the process.
-  - **Graph Representation:** Optimizing the graph representation (e.g., using adjacency lists or matrices) could improve the efficiency of graph traversal.
+  - **Cycle Detection:** For circuits with multiple loops, advanced cycle detection techniques (e.g., using Kirchhoff’s circuit laws) could further optimize the simplification process.
+  - **Graph Representation:** Optimizing the graph representation (e.g., using adjacency lists or matrices) could improve the efficiency of graph traversal and make the overall process faster.
 
 ---
 
@@ -146,4 +168,4 @@ By using graph theory to represent and analyze electrical circuits, this algorit
 
 This approach not only simplifies circuit analysis but also enhances the ability to automate and optimize the process, making it ideal for applications in circuit simulation and design.
 
----
+--- 
