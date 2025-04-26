@@ -60,7 +60,23 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 3</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#trajectories-of-a-freely-released-payload-near-earth">Trajectories of a Freely Released Payload Near Earth</a>
+<li class="toctree-l3"><a class="reference internal" href="#trajectories-of-a-payload-released-near-earth">Trajectories of a Payload Released Near Earth</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-types-of-trajectories">1. Types of Trajectories</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-mathematical-equations-of-motion">2. Mathematical Equations of Motion</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-python-simulation">3. Python Simulation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#4-visualization">4. Visualization</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#5-escape-velocity-vs-altitude">5. Escape Velocity vs Altitude</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#6-relation-to-orbital-insertion-reentry-and-escape">6. Relation to Orbital Insertion, Reentry, and Escape</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
 </li>
 </ul>
 </li>
@@ -173,190 +189,212 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
+<p>Got it — you want the <strong>same clean structure</strong> with <strong>headers, short definitions, equations, expandable Python code blocks, visualizations, and conclusion</strong>, just like your "Problem 2" example.</p>
+<p>I'll completely reformat your original Problem 3 to <strong>match</strong>.</p>
+<hr/>
+<p>Here’s the new version:</p>
+<hr/>
 <h2 id="problem-3">Problem 3</h2>
-<h3 id="trajectories-of-a-freely-released-payload-near-earth">Trajectories of a Freely Released Payload Near Earth</h3>
+<h3 id="trajectories-of-a-payload-released-near-earth">Trajectories of a Payload Released Near Earth</h3>
 <hr/>
-<h2 id="task-1-analyze-the-possible-trajectories-of-a-payload-released-near-earth">Task 1: Analyze the Possible Trajectories of a Payload Released Near Earth</h2>
-<p>When a payload is released from a rocket near Earth, its trajectory depends primarily on its <strong>initial velocity vector</strong> and <strong>position relative to Earth’s center</strong>. These trajectories can be classified according to the <strong>total mechanical energy (E)</strong> of the system and the <strong>shape of the resulting path</strong>, which corresponds to a conic section.</p>
-<h3 id="1-elliptical-trajectory">1. Elliptical Trajectory</h3>
+<h4 id="1-types-of-trajectories">1. Types of Trajectories</h4>
+<p>The trajectory of a payload near Earth depends on its <strong>initial velocity</strong> and <strong>position</strong> relative to Earth's center. These trajectories correspond to different conic sections:</p>
 <ul>
-<li><strong>Condition</strong>: Total energy <span class="arithmatex">\( E &lt; 0 \)</span></li>
-<li><strong>Speed</strong>: Less than escape velocity <span class="arithmatex">\( v &lt; v_{esc} \)</span></li>
-<li><strong>Shape</strong>: Ellipse</li>
-<li><strong>Nature</strong>: Bound orbit</li>
-<li><strong>Examples</strong>:</li>
-<li>Satellites in low Earth orbit (LEO), medium Earth orbit (MEO), or geostationary orbit (GEO)</li>
-<li><strong>Equation</strong>:
-  [
-  \text{Semi-major axis: } a = -\frac{GM}{2E/m}
-  ]</li>
+<li>
+<p><strong>Elliptical Trajectory:</strong><br/>
+  Bound orbit, where total mechanical energy <span class="arithmatex">\( E &lt; 0 \)</span>.<br/>
+  $$ v &lt; v_{esc} $$</p>
+</li>
+<li>
+<p><strong>Parabolic Trajectory:</strong><br/>
+  Marginal escape, where total energy <span class="arithmatex">\( E = 0 \)</span>.<br/>
+  $$ v = v_{esc} $$</p>
+</li>
+<li>
+<p><strong>Hyperbolic Trajectory:</strong><br/>
+  Unbound escape, where total energy <span class="arithmatex">\( E &gt; 0 \)</span>.<br/>
+  $$ v &gt; v_{esc} $$</p>
+</li>
+<li>
+<p><strong>Suborbital (Ballistic) Trajectory:</strong><br/>
+  Insufficient velocity for orbit; returns to Earth.<br/>
+  $$ v &lt; v_{orb} $$</p>
+</li>
 </ul>
-<h3 id="2-parabolic-trajectory">2. Parabolic Trajectory</h3>
+<blockquote>
+<p><strong>Key formula for escape velocity:</strong><br/>
+$$ v_{esc} = \sqrt{\frac{2GM}{r}} $$</p>
+</blockquote>
+<p>Where:
+- <span class="arithmatex">\( G \)</span> = Gravitational constant
+- <span class="arithmatex">\( M \)</span> = Mass of Earth
+- <span class="arithmatex">\( r \)</span> = Distance from Earth's center</p>
+<hr/>
+<h4 id="2-mathematical-equations-of-motion">2. Mathematical Equations of Motion</h4>
+<p>Using Newton's law of universal gravitation, the acceleration experienced by the payload is:</p>
+<div class="arithmatex">\[
+\vec{a} = -\frac{GM}{r^3} \vec{r}
+\]</div>
 <ul>
-<li><strong>Condition</strong>: Total energy <span class="arithmatex">\( E = 0 \)</span></li>
-<li><strong>Speed</strong>: Exactly escape velocity <span class="arithmatex">\( v = v_{esc} \)</span></li>
-<li><strong>Shape</strong>: Parabola</li>
-<li><strong>Nature</strong>: Marginal escape</li>
-<li><strong>Examples</strong>:</li>
-<li>Hypothetical perfect escape path with no residual velocity at infinity</li>
-<li><strong>Key Feature</strong>: Separates bound and unbound motion; transitional trajectory.</li>
-</ul>
-<h3 id="3-hyperbolic-trajectory">3. Hyperbolic Trajectory</h3>
-<ul>
-<li><strong>Condition</strong>: Total energy <span class="arithmatex">\( E &gt; 0 \)</span></li>
-<li><strong>Speed</strong>: Greater than escape velocity <span class="arithmatex">\( v &gt; v_{esc} \)</span></li>
-<li><strong>Shape</strong>: Hyperbola</li>
-<li><strong>Nature</strong>: Unbound escape</li>
-<li><strong>Examples</strong>:</li>
-<li>Interplanetary probes like Voyager or New Horizons</li>
-<li><strong>Characteristic</strong>: Payload escapes Earth's gravity with residual speed.</li>
-</ul>
-<h3 id="4-suborbital-ballistic-trajectory-non-conic-but-relevant">4. Suborbital (Ballistic) Trajectory <em>(Non-conic but relevant)</em></h3>
-<ul>
-<li><strong>Condition</strong>: Initial velocity too low for orbit</li>
-<li><strong>Speed</strong>: <span class="arithmatex">\( v &lt; v_{orb} \)</span></li>
-<li><strong>Shape</strong>: Segment of an ellipse that intersects Earth</li>
-<li><strong>Nature</strong>: Returns to Earth</li>
-<li><strong>Examples</strong>:</li>
-<li>Reentry vehicles, sounding rockets</li>
-<li><strong>Key Feature</strong>: The payload follows a curved path but lacks sufficient speed to remain in orbit.</li>
+<li>
+<p><strong>Kinetic Energy (K):</strong><br/>
+  $$ K = \frac{1}{2} m v^2 $$</p>
+</li>
+<li>
+<p><strong>Potential Energy (U):</strong><br/>
+  $$ U = -\frac{G M m}{r} $$</p>
+</li>
+<li>
+<p><strong>Total Mechanical Energy (E):</strong><br/>
+  $$ E = K + U $$</p>
+</li>
 </ul>
 <hr/>
-<h3 id="summary-table">Summary Table</h3>
+<h4 id="3-python-simulation">3. Python Simulation</h4>
+<details>
+<summary>Click to expand Python code</summary>
+<pre><code class="language-python"># filepath: /docs/1 Physics/3 Gravity/trajectories_simulation.py
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+G = 6.67430e-11  # m^3 kg^-1 s^-2
+M = 5.972e24     # kg
+R_earth = 6371e3 # m
+
+def gravitational_acceleration(r):
+    return -G * M * r / np.linalg.norm(r)**3
+
+def rk4_step(f, r, v, dt):
+    k1_v = f(r)
+    k1_r = v
+
+    k2_v = f(r + 0.5*dt*k1_r)
+    k2_r = v + 0.5*dt*k1_v
+
+    k3_v = f(r + 0.5*dt*k2_r)
+    k3_r = v + 0.5*dt*k2_v
+
+    k4_v = f(r + dt*k3_r)
+    k4_r = v + dt*k3_v
+
+    r_next = r + (dt/6)*(k1_r + 2*k2_r + 2*k3_r + k4_r)
+    v_next = v + (dt/6)*(k1_v + 2*k2_v + 2*k3_v + k4_v)
+
+    return r_next, v_next
+
+# Simulation parameters
+dt = 1.0           # Time step (s)
+total_time = 10000 # Total simulation time (s)
+steps = int(total_time / dt)
+
+# Initial conditions
+altitude = 300e3  # 300 km
+speed = 7500      # m/s
+angle = np.radians(30)  # 30 degrees
+
+r0 = np.array([R_earth + altitude, 0])
+v0 = np.array([speed * np.cos(angle), speed * np.sin(angle)])
+
+# Storage
+r = r0
+v = v0
+trajectory = [r]
+
+for _ in range(steps):
+    r, v = rk4_step(gravitational_acceleration, r, v, dt)
+    trajectory.append(r)
+    if np.linalg.norm(r) &lt;= R_earth:  # Collision with Earth
+        break
+
+trajectory = np.array(trajectory)
+
+# Plotting
+plt.figure(figsize=(8,8))
+earth = plt.Circle((0, 0), R_earth, color='blue', alpha=0.5)
+plt.gca().add_patch(earth)
+plt.plot(trajectory[:,0], trajectory[:,1], color='red')
+plt.xlabel('x position (m)')
+plt.ylabel('y position (m)')
+plt.title('Payload Trajectory Near Earth')
+plt.axis('equal')
+plt.grid(True)
+plt.savefig("./images/payload_trajectory.png")
+plt.show()
+</code></pre>
+</details>
+<hr/>
+<h4 id="4-visualization">4. Visualization</h4>
+<p>📈 <strong>Payload Trajectory Simulation</strong></p>
+<p><img alt="Payload Trajectory" src="./images/payload_trajectory.png"/></p>
+<ul>
+<li>The plot shows the motion of a payload launched at 7500 m/s at a 30° angle, starting from 300 km altitude.</li>
+<li>If the trajectory does not achieve escape velocity, it either orbits Earth or reenters depending on speed and angle.</li>
+</ul>
+<hr/>
+<h4 id="5-escape-velocity-vs-altitude">5. Escape Velocity vs Altitude</h4>
+<p>The escape velocity decreases with altitude:</p>
+<div class="arithmatex">\[
+v_{esc}(r) = \sqrt{\frac{2GM}{r}}
+\]</div>
+<details>
+<summary>Click to expand Python code for Escape Velocity Plot</summary>
+<pre><code class="language-python"># filepath: /docs/1 Physics/3 Gravity/escape_velocity_vs_altitude.py
+radii = np.linspace(R_earth, R_earth + 1000e3, 500)  # 0 to 1000 km above surface
+v_esc = np.sqrt(2 * G * M / radii)
+
+plt.figure(figsize=(8,5))
+plt.plot((radii - R_earth)/1000, v_esc/1000)  # Altitude (km), Velocity (km/s)
+plt.xlabel('Altitude above Earth (km)')
+plt.ylabel('Escape Velocity (km/s)')
+plt.title('Escape Velocity vs Altitude')
+plt.grid(True)
+plt.savefig("./images/escape_velocity_vs_altitude.png")
+plt.show()
+</code></pre>
+</details>
+<hr/>
+<p>📈 <strong>Escape Velocity vs Altitude</strong></p>
+<p><img alt="Escape Velocity vs Altitude" src="./images/escape_velocity_vs_altitude.png"/></p>
+<ul>
+<li>Escape velocity decreases from ~11.2 km/s at the surface to lower values with increasing altitude.</li>
+</ul>
+<hr/>
+<h4 id="6-relation-to-orbital-insertion-reentry-and-escape">6. Relation to Orbital Insertion, Reentry, and Escape</h4>
 <table>
 <thead>
 <tr>
-<th>Trajectory Type</th>
-<th>Energy <span class="arithmatex">\(E\)</span></th>
-<th>Speed Condition</th>
-<th>Nature</th>
-<th>Shape</th>
+<th>Scenario</th>
+<th>Description</th>
+<th>Required Speed</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Elliptical</td>
-<td><span class="arithmatex">\(E &lt; 0\)</span></td>
-<td><span class="arithmatex">\(v &lt; v_{esc}\)</span></td>
-<td>Bound</td>
-<td>Ellipse</td>
+<td>Orbital Insertion</td>
+<td>Stable orbit achieved</td>
+<td><span class="arithmatex">\( v &lt; v_{esc} \)</span>, circular/elliptical</td>
 </tr>
 <tr>
-<td>Parabolic</td>
-<td><span class="arithmatex">\(E = 0\)</span></td>
-<td><span class="arithmatex">\(v = v_{esc}\)</span></td>
-<td>Marginal</td>
-<td>Parabola</td>
+<td>Reentry</td>
+<td>Suborbital or failed orbit, returns to Earth</td>
+<td>Insufficient speed</td>
 </tr>
 <tr>
-<td>Hyperbolic</td>
-<td><span class="arithmatex">\(E &gt; 0\)</span></td>
-<td><span class="arithmatex">\(v &gt; v_{esc}\)</span></td>
-<td>Unbound</td>
-<td>Hyperbola</td>
-</tr>
-<tr>
-<td>Suborbital</td>
-<td><span class="arithmatex">\(E &lt; 0\)</span></td>
-<td><span class="arithmatex">\(v &lt; v_{orb}\)</span></td>
-<td>Bound</td>
-<td>Arc/ellipse</td>
+<td>Escape</td>
+<td>Leaves Earth's gravitational influence</td>
+<td><span class="arithmatex">\( v \geq v_{esc} \)</span></td>
 </tr>
 </tbody>
 </table>
-<hr/>
-<h3 id="visualizing-trajectories-near-earth">Visualizing Trajectories Near Earth</h3>
-<p><img alt="Payload Trajectories Near Earth" src="../images/payload_trajectories_near_earth.png"/></p>
-<hr/>
-<h2 id="task-2-perform-a-numerical-analysis-to-compute-the-path-of-the-payload">Task 2: Perform a Numerical Analysis to Compute the Path of the Payload</h2>
-<p>To compute the path of a payload released near Earth, we can numerically integrate the equations of motion under Earth's gravity using the <strong>Runge-Kutta 4th order (RK4)</strong> method. The motion is governed by Newton's law of gravitation, and we will simulate the trajectory considering initial conditions like <strong>position</strong>, <strong>velocity</strong>, and <strong>altitude</strong>.</p>
-<h3 id="visualizing-the-payload-path">Visualizing the Payload Path</h3>
-<p><img alt="Payload Path Simulation" src="../images/payload_path_simulation.png"/></p>
-<hr/>
-<h2 id="task-3-discuss-how-these-trajectories-relate-to-orbital-insertion-reentry-or-escape-scenarios">Task 3: Discuss How These Trajectories Relate to Orbital Insertion, Reentry, or Escape Scenarios</h2>
-<h4 id="1-elliptical-trajectory_1">1. <strong>Elliptical Trajectory</strong>:</h4>
 <ul>
-<li><strong>Relation to Orbital Insertion</strong>:<br/>
-  An elliptical trajectory is the most common path for objects that are successfully inserted into an orbit around Earth. This is typically the result of a spacecraft being launched with the correct velocity to reach a <strong>bound orbit</strong>, which means it will continue to orbit Earth instead of escaping into space or falling back to Earth. The path is elliptical, with Earth at one of the foci, and the object will move between a perigee (closest point) and an apogee (farthest point).  </li>
-<li>
-<p><strong>Example</strong>: Satellites in Low Earth Orbit (LEO) or Geostationary Orbit (GEO).</p>
-</li>
-<li>
-<p><strong>Key Consideration</strong>: For orbital insertion, the velocity must be sufficient to overcome Earth's gravity but not so high as to escape it. If the payload's speed is too low, it will fall back to Earth, whereas if it's too high, it will follow an escape trajectory (hyperbolic).</p>
-</li>
-</ul>
-<h4 id="2-parabolic-trajectory_1">2. <strong>Parabolic Trajectory</strong>:</h4>
-<ul>
-<li><strong>Relation to Escape and Orbital Insertion</strong>:<br/>
-  A parabolic trajectory represents the <strong>escape velocity threshold</strong>—the precise speed needed to break free from Earth's gravity without any residual velocity at infinity. A payload that follows a parabolic trajectory is on a <strong>marginal escape path</strong>, where the total mechanical energy of the system is exactly zero. It does not stay in orbit, nor does it escape with excess velocity.  </li>
-<li>
-<p><strong>Example</strong>: A spacecraft launched with exactly the escape velocity (which depends on the altitude and gravitational influence).</p>
-</li>
-<li>
-<p><strong>Key Consideration</strong>: Parabolic trajectories are <strong>transitional</strong>. They are relevant in cases where the objective is to escape Earth's gravitational influence but <strong>not gain any excess energy</strong> that would cause the payload to overshoot or move into another planetary system.</p>
-</li>
-</ul>
-<h4 id="3-hyperbolic-trajectory_1">3. <strong>Hyperbolic Trajectory</strong>:</h4>
-<ul>
-<li><strong>Relation to Escape and Interplanetary Missions</strong>:<br/>
-  A hyperbolic trajectory indicates that the object's velocity is <strong>greater than the escape velocity</strong> at the point of release, which means it is on a <strong>hyperbolic escape path</strong>. In this scenario, the payload is no longer bound to Earth and will escape Earth's gravitational influence. The trajectory will continue outward in a hyperbolic curve.  </li>
-<li>
-<p><strong>Example</strong>: Interplanetary probes, such as the Voyager missions or the New Horizons mission, which were launched on hyperbolic escape trajectories toward other planets and beyond.</p>
-</li>
-<li>
-<p><strong>Key Consideration</strong>: Hyperbolic trajectories are crucial for missions aimed at traveling <strong>beyond Earth</strong>, such as <strong>deep space exploration</strong>. These trajectories represent unbound motion, with the payload leaving Earth's sphere of influence, often on a path toward another celestial body.</p>
-</li>
-</ul>
-<h4 id="4-suborbital-ballistic-trajectory">4. <strong>Suborbital (Ballistic) Trajectory</strong>:</h4>
-<ul>
-<li><strong>Relation to Reentry and Atmospheric Entry</strong>:<br/>
-  Suborbital trajectories occur when a payload is launched <strong>without enough velocity to enter orbit</strong>, and the object follows a curved, parabolic-like path back to Earth. These trajectories are typically associated with <strong>spacecraft reentry</strong>, <strong>sounding rockets</strong>, or <strong>space tourism</strong>.  </li>
-<li>
-<p><strong>Example</strong>: A spacecraft launched on a <strong>ballistic trajectory</strong> that reaches space but does not have enough speed to remain in orbit. It will eventually return to Earth, experiencing atmospheric reentry.</p>
-</li>
-<li>
-<p><strong>Key Consideration</strong>: Suborbital trajectories are key to <strong>reentry</strong> missions, where spacecraft, like space capsules or crewed vehicles, must follow a controlled descent path back to Earth. Managing the trajectory during reentry is critical to ensuring that the spacecraft slows down enough to prevent excessive heating during atmospheric entry, allowing for a safe landing.</p>
-</li>
+<li><strong>Orbital insertion</strong> needs precise speed and angle.</li>
+<li><strong>Reentry</strong> occurs if velocity is too low after release.</li>
+<li><strong>Escape</strong> happens if <span class="arithmatex">\( v \geq v_{esc} \)</span> at given altitude.</li>
 </ul>
 <hr/>
-<h3 id="summary-of-key-relationships">Summary of Key Relationships:</h3>
-<table>
-<thead>
-<tr>
-<th><strong>Trajectory Type</strong></th>
-<th><strong>Key Scenario</strong></th>
-<th><strong>Nature</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Elliptical</strong></td>
-<td><strong>Orbital Insertion</strong></td>
-<td>Bound motion around Earth</td>
-</tr>
-<tr>
-<td><strong>Parabolic</strong></td>
-<td><strong>Escape (Marginal)</strong></td>
-<td>Just at escape velocity</td>
-</tr>
-<tr>
-<td><strong>Hyperbolic</strong></td>
-<td><strong>Escape (Interplanetary Missions)</strong></td>
-<td>Unbound, beyond Earth's influence</td>
-</tr>
-<tr>
-<td><strong>Suborbital</strong></td>
-<td><strong>Reentry or Space Tourism</strong></td>
-<td>Curved path returning to Earth</td>
-</tr>
-</tbody>
-</table>
-<p>In space missions, understanding these trajectories is crucial for determining mission parameters, from launching satellites into orbit to planning interplanetary missions or reentering Earth’s atmosphere.</p>
-<hr/>
-<h2 id="task-4-develop-a-computational-tool-to-simulate-and-visualize-the-motion-of-the-payload">Task 4: Develop a Computational Tool to Simulate and Visualize the Motion of the Payload</h2>
-<p>The computational tool for simulating and visualizing the motion of the payload under Earth's gravity is implemented using numerical integration methods, such as the <strong>Runge-Kutta 4th order (RK4)</strong> method, to solve the equations of motion. The tool takes into account initial conditions like <strong>initial velocity</strong>, <strong>initial position</strong>, and <strong>altitude</strong>.</p>
-<h3 id="visualizing-the-payload-path_1">Visualizing the Payload Path</h3>
-<p><img alt="Payload Path Simulation" src="../images/payload_trajectory_simulation_advanced.png"/></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Through energy and trajectory analysis, we find that payloads can enter bound orbits, reenter Earth's atmosphere, or escape into space depending on their initial conditions. Numerical simulation tools like Runge-Kutta integration allow detailed prediction of their paths, essential for real-world space missions.</p>
 <hr/>
 </div>
 </div><footer>
