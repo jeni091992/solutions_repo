@@ -1,3 +1,6 @@
+Here is the markdown addressing the task requirements and deliverables for **Equivalent Resistance Using Graph Theory**:
+
+```markdown
 ## Problem 1
 
 ### Equivalent Resistance Using Graph Theory
@@ -112,3 +115,47 @@ def remove_resistors(circuit_graph, nodes):
 def add_combined_resistor(circuit_graph, nodes, resistance):
     # Add the new combined resistor to the graph
     pass
+```
+
+---
+
+#### 4. Test Cases and Examples
+
+- **Example 1: Simple Series and Parallel Combinations**
+  - For a circuit with two resistors in series \( R_1 = 10 \, \Omega \) and \( R_2 = 5 \, \Omega \), the algorithm will compute:
+    \[
+    R_{\text{eq}} = R_1 + R_2 = 10 + 5 = 15 \, \Omega
+    \]
+  - For a circuit with two resistors in parallel \( R_1 = 10 \, \Omega \) and \( R_2 = 5 \, \Omega \), the algorithm will compute:
+    \[
+    R_{\text{eq}} = \frac{R_1 \cdot R_2}{R_1 + R_2} = \frac{10 \cdot 5}{10 + 5} = \frac{50}{15} = 3.33 \, \Omega
+    \]
+
+- **Example 2: Nested Configurations**
+  - A circuit where resistors are first simplified in series and then in parallel will be handled by recursively applying the series and parallel reduction steps until only one equivalent resistance remains.
+
+- **Example 3: Complex Graph with Cycles**
+  - For more complex circuits with cycles and multiple resistors, the algorithm will use depth-first or breadth-first search techniques to simplify the circuit and compute the final equivalent resistance.
+
+---
+
+#### 5. Efficiency and Potential Improvements
+
+- **Efficiency:**
+  - The algorithm performs well for small to moderately complex circuits. It iteratively reduces the graph, simplifying series and parallel connections.
+  - As the number of resistors and connections grows, the time complexity may increase, as each step involves checking the graph for series or parallel connections.
+
+- **Potential Improvements:**
+  - **Cycle Detection:** For circuits with multiple loops, a more advanced approach for cycle detection (e.g., using Kirchhoff's circuit laws or a specialized algorithm for detecting cycles) could optimize the process.
+  - **Graph Representation:** Optimizing the graph representation (e.g., using adjacency lists or matrices) could improve the efficiency of graph traversal.
+
+---
+
+#### 6. Conclusion
+
+By using graph theory to represent and analyze electrical circuits, this algorithm simplifies the task of calculating the equivalent resistance. The iterative reduction of series and parallel connections provides an efficient method for handling both simple and complex circuits, including those with nested and cyclical resistor configurations.
+
+This approach not only simplifies circuit analysis but also enhances the ability to automate and optimize the process, making it ideal for applications in circuit simulation and design.
+
+---
+```
