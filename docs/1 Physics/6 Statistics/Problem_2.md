@@ -152,6 +152,7 @@ plt.close()  # Close the plot to avoid display
 
 </details>
 
+
 The convergence plot shows how the estimated value of π improves as the number of random points increases. As the sample size grows, the estimate gets closer to the true value of π.
 
 ![Convergence of π Estimate](./images/convergence_plot.png)
@@ -300,6 +301,7 @@ plt.show()
 ```
 
 </details>
+
 
 The convergence plot for Buffon’s Needle simulation demonstrates how the estimate of π improves as the number of needle drops increases. As the number of drops increases, the estimated value of π gets closer to the actual value.
 
