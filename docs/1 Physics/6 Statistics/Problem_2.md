@@ -209,7 +209,7 @@ buffon_needle_simulation(num_needles, frames=100)
 
 The following GIF demonstrates the Buffon’s Needle simulation, where needles are dropped randomly and the crossing event is recorded. Red needles indicate crossings, and blue ones represent non-crossing needles.
 
-![Buffon's Needle Simulation](./images/buffon_needle_simulation.gif)
+![Buffon's Needle Simulation](./images/buffon_simulation.gif)
 
 ---
 
@@ -252,24 +252,3 @@ plt.show()
 | **Historical Value** | Popular in early MC simulations      | Historically significant (1733) |
 
 ---
-
-### **Generating Animations (GIFs or Videos)**
-
-You can save the animations of both methods (Monte Carlo or Buffon’s Needle) as **GIFs** or **videos** by modifying the code provided. For example:
-
-- **GIFs**: The `imageio.mimsave` function is used to save the frames as a GIF.
-- **Videos**: You can use OpenCV’s `cv2.VideoWriter` to save the frames as a video file in `.avi` format.
-
-### **Installation of Dependencies**:
-
-Make sure you have the following Python packages installed:
-
-```bash
-pip install numpy matplotlib imageio opencv-python
-```
-
-Now you can generate the visualizations and animations based on these methods! Let me know if you'd like more help running or tweaking the code. 🎥
-
----
-
-By organizing the content this way, you create a more readable and engaging document while keeping the Python code neatly collapsed. Visualizations appear at the relevant sections to enhance understanding.
