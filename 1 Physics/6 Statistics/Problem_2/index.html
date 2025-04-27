@@ -86,6 +86,8 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#estimating-using-monte-carlo-methods">Estimating π Using Monte Carlo Methods</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -171,7 +173,261 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-2">Problem 2</h1>
+<h2 id="problem-2">Problem 2</h2>
+<h3 id="estimating-using-monte-carlo-methods">Estimating π Using Monte Carlo Methods</h3>
+<hr/>
+<h1 id="part-1-estimating-using-a-circle">Part 1: Estimating π Using a Circle</h1>
+<hr/>
+<h2 id="11-theoretical-foundation">1.1 Theoretical Foundation</h2>
+<p>We imagine a <strong>square</strong> with side length 2 centered at (0,0), containing an <strong>inscribed unit circle</strong> (radius = 1).</p>
+<table>
+<thead>
+<tr>
+<th>Shape</th>
+<th>Area Formula</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Square</td>
+<td><span class="arithmatex">\( (2)^2 \)</span></td>
+<td>4</td>
+</tr>
+<tr>
+<td>Circle</td>
+<td><span class="arithmatex">\( \pi (1)^2 \)</span></td>
+<td><span class="arithmatex">\( \pi \)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Thus, the probability a random point lands inside the circle:</p>
+<div class="arithmatex">\[
+P(\text{inside circle}) = \frac{\pi}{4}
+\]</div>
+<p>Rearranging:</p>
+<div class="arithmatex">\[
+\pi \approx 4 \times \frac{\text{Points inside circle}}{\text{Total points}}
+\]</div>
+<hr/>
+<h2 id="12-simulation">1.2 Simulation</h2>
+<details>
+<summary>Click to expand Python code</summary>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+def estimate_pi(num_points, frames=50):
+    x = np.random.uniform(-1, 1, num_points)
+    y = np.random.uniform(-1, 1, num_points)
+
+    # Create an empty list to store the frames
+    frames_list = []
+
+    for i in range(1, frames + 1):
+        num_sample = int(i * num_points / frames)  # Increase number of points each frame
+        inside_circle = (x[:num_sample]**2 + y[:num_sample] &lt;= 1)
+
+        fig, ax = plt.subplots(figsize=(6,6))
+        ax.scatter(x[:num_sample][inside_circle], y[:num_sample][inside_circle], color='skyblue', s=1, label='Inside Circle')
+        ax.scatter(x[:num_sample][~inside_circle], y[:num_sample][~inside_circle], color='salmon', s=1, label='Outside Circle')
+
+        # Draw unit circle
+        circle = plt.Circle((0,0), 1, color='black', fill=False, linestyle='--', linewidth=2)
+        ax.add_artist(circle)
+
+        # Draw square boundary
+        ax.set_xlim([-1, 1])
+        ax.set_ylim([-1, 1])
+        ax.plot([-1, -1, 1, 1, -1], [-1, 1, 1, -1, -1], 'k--', linewidth=2)
+
+        ax.set_aspect('equal')
+        ax.set_title(f'Monte Carlo Estimation of π ({num_sample} points)', fontsize=14)
+        ax.legend()
+
+        # Save the current frame
+        plt.close(fig)  # Prevent display during loop
+        frames_list.append(fig)
+
+    # Save as GIF
+    gif_filename = 'monte_carlo_pi_estimation.gif'
+    imageio.mimsave(gif_filename, frames_list, duration=0.1)  # 0.1 sec per frame
+    print(f"GIF saved as {gif_filename}")
+
+# Example usage
+num_points = 10000
+estimate_pi(num_points, frames=100)
+</code></pre>
+</details>
+<hr/>
+<h2 id="13-visualization">1.3 Visualization</h2>
+<p>The following animation shows how the points are plotted inside and outside the unit circle as the number of points increases. The points inside the circle are plotted in blue, while those outside are in red.</p>
+<p><img alt="Monte Carlo Estimation of π" src="monte_carlo_pi_estimation.gif"/></p>
+<hr/>
+<h2 id="14-analysis-convergence-plot">1.4 Analysis (Convergence Plot)</h2>
+<details>
+<summary>Click to expand Python code</summary>
+<pre><code class="language-python">sample_sizes = [10, 100, 1000, 10000, 100000]
+estimates = []
+
+for size in sample_sizes:
+    pi_estimate, _, _, _ = estimate_pi(size)
+    estimates.append(pi_estimate)
+
+plt.figure(figsize=(8,5))
+plt.plot(sample_sizes, estimates, marker='o', label='Estimated π', color='teal')
+plt.axhline(y=np.pi, color='red', linestyle='--', label='Actual π (Reference)')
+plt.xscale('log')
+plt.xlabel('Number of Points (log scale)')
+plt.ylabel('Estimated π')
+plt.title('Convergence of π Estimate (Circle Method)', fontsize=14)
+plt.legend()
+plt.grid(True)
+plt.show()
+</code></pre>
+</details>
+<hr/>
+<h1 id="part-2-estimating-using-buffons-needle">Part 2: Estimating π Using Buffon’s Needle</h1>
+<hr/>
+<h2 id="21-theoretical-foundation">2.1 Theoretical Foundation</h2>
+<p><strong>Buffon’s Needle Problem</strong>:</p>
+<ul>
+<li>Drop a needle of length <span class="arithmatex">\( l \)</span> onto parallel lines spaced <span class="arithmatex">\( d \)</span> units apart.</li>
+<li>The needle crosses a line with probability:</li>
+</ul>
+<div class="arithmatex">\[
+P = \frac{2l}{d\pi}
+\]</div>
+<p>Thus:</p>
+<div class="arithmatex">\[
+\pi \approx \frac{2l \times \text{Number of Drops}}{d \times \text{Number of Crossings}}
+\]</div>
+<hr/>
+<h2 id="22-simulation">2.2 Simulation</h2>
+<details>
+<summary>Click to expand Python code</summary>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import imageio
+
+def buffon_needle_simulation(num_needles, l=1.0, d=2.0, frames=50):
+    # Create an empty list to store frames
+    frames_list = []
+
+    centers = np.random.uniform(0, d/2, num_needles)
+    angles = np.random.uniform(0, np.pi/2, num_needles)
+
+    # Create the animation
+    for i in range(1, frames + 1):
+        fig, ax = plt.subplots(figsize=(8,6))
+
+        # Draw parallel lines
+        for j in range(-2, 4):
+            ax.axhline(j * d/2, color='gray', linestyle='--', linewidth=1)
+
+        # Plot the first 'i' needles
+        for j in range(i):
+            center = centers[j]
+            angle = angles[j]
+            x_start = 0
+            x_end = l * np.cos(angle)
+            y_start = center
+            y_end = center + l * np.sin(angle)
+            color = 'red' if center &lt;= (l/2) * np.sin(angle) else 'blue'
+            ax.plot([x_start, x_end], [y_start, y_end], color=color)
+
+        ax.set_xlim(-1, 2)
+        ax.set_ylim(-1, d*2)
+        ax.set_title(f'Buffon’s Needle Simulation ({i} Needles)', fontsize=14)
+        ax.set_aspect('equal')
+
+        # Save the current frame
+        plt.close(fig)
+        frames_list.append(fig)
+
+    # Save as GIF
+    gif_filename = 'buffon_needle_simulation.gif'
+    imageio.mimsave(gif_filename, frames_list, duration=0.1)
+    print(f"GIF saved as {gif_filename}")
+
+# Example usage
+num_needles = 10000
+buffon_needle_simulation(num_needles, frames=100)
+</code></pre>
+</details>
+<hr/>
+<h2 id="23-visualization">2.3 Visualization</h2>
+<p>The following GIF demonstrates the Buffon’s Needle simulation, where needles are dropped randomly and the crossing event is recorded. Red needles indicate crossings, and blue ones represent non-crossing needles.</p>
+<p><img alt="Buffon's Needle Simulation" src="./images/buffon_needle_simulation.gif"/></p>
+<hr/>
+<h2 id="24-analysis-convergence-plot">2.4 Analysis (Convergence Plot)</h2>
+<details>
+<summary>Click to expand Python code</summary>
+<pre><code class="language-python">sample_sizes = [10, 100, 1000, 10000, 100000]
+estimates = []
+
+for size in sample_sizes:
+    pi_estimate, _, _, _ = buffon_needle_simulation(size)
+    estimates.append(pi_estimate)
+
+plt.figure(figsize=(8,5))
+plt.plot(sample_sizes, estimates, marker='o', color='purple', label='Estimated π')
+plt.axhline(y=np.pi, color='red', linestyle='--', label='Actual π (Reference)')
+plt.xscale('log')
+plt.xlabel('Number of Needles (log scale)')
+plt.ylabel('Estimated π')
+plt.title('Convergence of π Estimate (Buffon’s Needle)', fontsize=14)
+plt.legend()
+plt.grid(True)
+plt.show()
+</code></pre>
+</details>
+<hr/>
+<h1 id="conclusion">Conclusion</h1>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Circle Sampling</th>
+<th>Buffon's Needle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Simplicity</strong></td>
+<td>Very simple setup</td>
+<td>Slightly more complex</td>
+</tr>
+<tr>
+<td><strong>Convergence Rate</strong></td>
+<td>Faster</td>
+<td>Slower</td>
+</tr>
+<tr>
+<td><strong>Implementation</strong></td>
+<td>Straightforward random sampling</td>
+<td>Requires geometry (angles/centers)</td>
+</tr>
+<tr>
+<td><strong>Historical Value</strong></td>
+<td>Popular in early MC simulations</td>
+<td>Historically significant (1733)</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h3 id="generating-animations-gifs-or-videos"><strong>Generating Animations (GIFs or Videos)</strong></h3>
+<p>You can save the animations of both methods (Monte Carlo or Buffon’s Needle) as <strong>GIFs</strong> or <strong>videos</strong> by modifying the code provided. For example:</p>
+<ul>
+<li><strong>GIFs</strong>: The <code>imageio.mimsave</code> function is used to save the frames as a GIF.</li>
+<li><strong>Videos</strong>: You can use OpenCV’s <code>cv2.VideoWriter</code> to save the frames as a video file in <code>.avi</code> format.</li>
+</ul>
+<h3 id="installation-of-dependencies"><strong>Installation of Dependencies</strong>:</h3>
+<p>Make sure you have the following Python packages installed:</p>
+<pre><code class="language-bash">pip install numpy matplotlib imageio opencv-python
+</code></pre>
+<p>Now you can generate the visualizations and animations based on these methods! Let me know if you'd like more help running or tweaking the code. 🎥</p>
+<hr/>
+<p>By organizing the content this way, you create a more readable and engaging document while keeping the Python code neatly collapsed. Visualizations appear at the relevant sections to enhance understanding.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
