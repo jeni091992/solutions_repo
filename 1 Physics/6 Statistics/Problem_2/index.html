@@ -357,7 +357,7 @@ buffon_needle_simulation(num_needles, frames=100)
 <hr/>
 <h2 id="23-visualization">2.3 Visualization</h2>
 <p>The following GIF demonstrates the Buffon’s Needle simulation, where needles are dropped randomly and the crossing event is recorded. Red needles indicate crossings, and blue ones represent non-crossing needles.</p>
-<p><img alt="Buffon's Needle Simulation" src="./images/buffon_needle_simulation.gif"/></p>
+<p><img alt="Buffon's Needle Simulation" src="../images/buffon_simulation.gif"/></p>
 <hr/>
 <h2 id="24-analysis-convergence-plot">2.4 Analysis (Convergence Plot)</h2>
 <details>
@@ -415,19 +415,6 @@ plt.show()
 </tbody>
 </table>
 <hr/>
-<h3 id="generating-animations-gifs-or-videos"><strong>Generating Animations (GIFs or Videos)</strong></h3>
-<p>You can save the animations of both methods (Monte Carlo or Buffon’s Needle) as <strong>GIFs</strong> or <strong>videos</strong> by modifying the code provided. For example:</p>
-<ul>
-<li><strong>GIFs</strong>: The <code>imageio.mimsave</code> function is used to save the frames as a GIF.</li>
-<li><strong>Videos</strong>: You can use OpenCV’s <code>cv2.VideoWriter</code> to save the frames as a video file in <code>.avi</code> format.</li>
-</ul>
-<h3 id="installation-of-dependencies"><strong>Installation of Dependencies</strong>:</h3>
-<p>Make sure you have the following Python packages installed:</p>
-<pre><code class="language-bash">pip install numpy matplotlib imageio opencv-python
-</code></pre>
-<p>Now you can generate the visualizations and animations based on these methods! Let me know if you'd like more help running or tweaking the code. 🎥</p>
-<hr/>
-<p>By organizing the content this way, you create a more readable and engaging document while keeping the Python code neatly collapsed. Visualizations appear at the relevant sections to enhance understanding.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
