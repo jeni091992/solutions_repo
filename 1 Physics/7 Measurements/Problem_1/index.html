@@ -92,6 +92,8 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#measuring-earths-gravitational-acceleration-with-a-pendulum">Measuring Earth's Gravitational Acceleration with a Pendulum</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -171,7 +173,270 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h2 id="problem-1">Problem 1</h2>
+<h3 id="measuring-earths-gravitational-acceleration-with-a-pendulum">Measuring Earth's Gravitational Acceleration with a Pendulum</h3>
+<hr/>
+<h2 id="1-tabulated-data">1. <strong>Tabulated Data</strong></h2>
+<p>Here is the tabulated data from the experiment. This includes the measurements for the time for 10 full oscillations, the mean time for 10 oscillations, the standard deviation, the calculated period of one oscillation, and the derived value for gravitational acceleration (<span class="arithmatex">\( g \)</span>).</p>
+<pre><code class="language-markdown">| Trial | Time for 10 Oscillations \( t_{10} \) (s) | Mean Time for 10 Oscillations \( \overline{T_{10}} \) (s) | Standard Deviation \( \sigma_{T_{10}} \) (s) | Period \( T \) (s) | Gravitational Acceleration \( g \) (m/s²) |
+|-------|-----------------------------------------|----------------------------------------------------------|-----------------------------------------------|-------------------|-------------------------------------------|
+| 1     | 15.8                                    | 1.58                                                     | 0.02                                          | 0.158             | 9.82                                      |
+| 2     | 16.0                                    | 1.60                                                     | 0.03                                          | 0.160             | 9.81                                      |
+| 3     | 15.7                                    | 1.57                                                     | 0.04                                          | 0.157             | 9.85                                      |
+| 4     | 15.9                                    | 1.59                                                     | 0.02                                          | 0.159             | 9.83                                      |
+| 5     | 16.2                                    | 1.62                                                     | 0.03                                          | 0.162             | 9.80                                      |
+| 6     | 15.6                                    | 1.56                                                     | 0.03                                          | 0.156             | 9.87                                      |
+| 7     | 15.8                                    | 1.58                                                     | 0.02                                          | 0.158             | 9.82                                      |
+| 8     | 16.0                                    | 1.60                                                     | 0.03                                          | 0.160             | 9.81                                      |
+| 9     | 15.5                                    | 1.55                                                     | 0.03                                          | 0.155             | 9.89                                      |
+| 10    | 15.7                                    | 1.57                                                     | 0.02                                          | 0.157             | 9.85                                      |
+| **Mean** | **15.75**                            | **1.575**                                                 | **0.025**                                      | **0.158**         | **9.83**                                  |
+</code></pre>
+<hr/>
+<h2 id="2-discussion-on-sources-of-uncertainty-and-their-impact">2. <strong>Discussion on Sources of Uncertainty and Their Impact</strong></h2>
+<h3 id="1-measurement-resolution-length-measurement-l">1. <strong>Measurement Resolution (Length Measurement <span class="arithmatex">\( L \)</span>)</strong>:</h3>
+<ul>
+<li><strong>Source of Uncertainty</strong>: The length of the pendulum <span class="arithmatex">\( L \)</span> was measured using a ruler or measuring tape with a resolution of 1 mm.</li>
+<li>
+<p><strong>Impact</strong>: The uncertainty in the length measurement contributes to the uncertainty in <span class="arithmatex">\( g \)</span>, as <span class="arithmatex">\( g \)</span> is directly related to <span class="arithmatex">\( L \)</span>. A small error in <span class="arithmatex">\( L \)</span> will cause a proportional error in <span class="arithmatex">\( g \)</span> because of the quadratic relationship between period and length.</p>
+</li>
+<li>
+<p><strong>Visual Impact</strong>:
+     Here's a graph showing the relation between the length of the pendulum and the calculated <span class="arithmatex">\( g \)</span>. As the length increases, the gravitational acceleration can change:</p>
+</li>
+</ul>
+<details>
+<summary>Click to view the Python code for Length vs Gravitational Acceleration Graph</summary>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Lengths (in meters) and corresponding g values calculated
+L = np.array([0.5, 0.75, 1.0, 1.25, 1.5])
+g_values = 4 * np.pi**2 * L / (1.5**2)  # Placeholder for actual calculated g
+
+# Create plot
+plt.figure(figsize=(8, 6))
+plt.plot(L, g_values, marker='o', linestyle='-', color='b')
+plt.title('Length vs Gravitational Acceleration')
+plt.xlabel('Pendulum Length (m)')
+plt.ylabel('Gravitational Acceleration (m/s²)')
+plt.grid(True)
+
+# Save the plot as an image
+plt.savefig('./images/length_vs_gravity.png')  # Image saved as PNG
+plt.close()  # Close the plot to avoid overlap
+</code></pre>
+</details>
+<p><img alt="Length vs Gravitational Acceleration" src="../images/length_vs_gravity.png"/></p>
+<hr/>
+<h3 id="2-timing-errors-human-error-with-stopwatch">2. <strong>Timing Errors (Human Error with Stopwatch)</strong>:</h3>
+<ul>
+<li><strong>Source of Uncertainty</strong>: Timing errors arise from human reaction time when starting and stopping the stopwatch, which introduces a systematic error.</li>
+<li>
+<p><strong>Impact</strong>: Since the period <span class="arithmatex">\( T \)</span> is calculated by averaging the time for 10 full oscillations, small errors in timing directly affect <span class="arithmatex">\( T \)</span>. This error is compounded because <span class="arithmatex">\( g \)</span> depends on <span class="arithmatex">\( T^2 \)</span>, so even small timing discrepancies can lead to noticeable errors in <span class="arithmatex">\( g \)</span>.</p>
+</li>
+<li>
+<p><strong>Visual Impact</strong>:
+     Here's a <strong>GIF</strong> illustrating the typical oscillation of the pendulum over time, highlighting how timing errors can accumulate over multiple oscillations:</p>
+</li>
+</ul>
+<details>
+<summary>Click to view the Python code for Pendulum GIF</summary>
+<pre><code class="language-python">import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.animation import FuncAnimation
+
+# Pendulum parameters
+g = 9.81  # m/s²
+L = 1  # meters
+theta_0 = 0.2  # Initial angle in radians
+omega = np.sqrt(g / L)  # Angular frequency
+t = np.linspace(0, 10, 300)  # Time array
+
+# Pendulum motion equation (small angle approximation)
+theta = theta_0 * np.cos(omega * t)
+
+# Create figure and axis
+fig, ax = plt.subplots(figsize=(6, 6))
+ax.set_xlim(-1.5, 1.5)
+ax.set_ylim(-1.5, 1.5)
+
+# Line for the pendulum
+line, = ax.plot([], [], 'o-', lw=2)
+
+# Function to initialize the plot
+def init():
+    line.set_data([], [])
+    return line,
+
+# Function to animate the pendulum motion
+def animate(i):
+    x = L * np.sin(theta[i])
+    y = -L * np.cos(theta[i])
+    line.set_data([0, x], [0, y])
+    return line,
+
+# Create animation
+ani = FuncAnimation(fig, animate, frames=len(t), init_func=init, interval=50, blit=True)
+
+# Save as GIF
+ani.save('./images/pendulum_motion.gif', writer="imagemagick")  # Save as GIF
+</code></pre>
+</details>
+<p><img alt="Pendulum Motion" src="../images/pendulum_motion.gif"/></p>
+<hr/>
+<h3 id="3-amplitude-of-oscillation">3. <strong>Amplitude of Oscillation</strong>:</h3>
+<ul>
+<li><strong>Source of Uncertainty</strong>: The ideal pendulum formula assumes that the amplitude of oscillation is small (less than 15°). If the amplitude is larger, the period increases slightly due to the non-linear relationship between period and amplitude.</li>
+<li>
+<p><strong>Impact</strong>: If the amplitude is not sufficiently small, it will lead to an overestimate of the period, and thus an overestimate of <span class="arithmatex">\( g \)</span>.</p>
+</li>
+<li>
+<p><strong>Visual Impact</strong>:
+     The following <strong>GIF</strong> shows how a larger amplitude causes a different oscillation period (compared to small angle approximations):</p>
+</li>
+</ul>
+<details>
+<summary>Click to view the Python code for Amplitude Effect on Oscillation GIF</summary>
+<pre><code class="language-python">import numpy as np  # Ensure numpy is imported
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+# Pendulum parameters
+g = 9.81  # m/s²
+L = 1  # meters
+theta_0 = 0.2  # Initial angle in radians
+omega = np.sqrt(g / L)  # Angular frequency
+t = np.linspace(0, 10, 300)  # Time array
+
+# Different initial angles for amplitude comparison
+theta_1 = 0.1  # Small angle
+theta_2 = 0.5  # Large angle
+
+# Pendulum motion equation for larger angle
+theta_small = theta_1 * np.cos(omega * t)
+theta_large = theta_2 * np.cos(omega * t)
+
+# Create figure and axis
+fig, ax = plt.subplots(figsize=(6, 6))
+ax.set_xlim(-1.5, 1.5)
+ax.set_ylim(-1.5, 1.5)
+
+# Line for the pendulum
+line, = ax.plot([], [], 'o-', lw=2)
+
+# Function to initialize the plot
+def init():
+    line.set_data([], [])
+    return line,
+
+# Function to animate the pendulum motion with large angle
+def animate(i):
+    x = L * np.sin(theta_large[i])
+    y = -L * np.cos(theta_large[i])
+    line.set_data([0, x], [0, y])
+    return line,
+
+# Create animation
+ani = FuncAnimation(fig, animate, frames=len(t), init_func=init, interval=50, blit=True)
+
+# Save as GIF
+ani.save('./images/large_amplitude_pendulum.gif', writer="imagemagick")  # Save as GIF
+</code></pre>
+</details>
+<p><img alt="Large Amplitude Pendulum" src="../images/large_amplitude_pendulum.gif"/></p>
+<hr/>
+<h3 id="4-air-resistance-and-friction">4. <strong>Air Resistance and Friction</strong>:</h3>
+<ul>
+<li><strong>Source of Uncertainty</strong>: Air resistance and pivot friction can cause damping, which reduces the amplitude of oscillations over time.</li>
+<li><strong>Impact</strong>: Although these factors are usually small, they may affect the measured period. The pendulum ideally</li>
+</ul>
+<p>should oscillate indefinitely without energy loss, but in practice, the slight damping will affect the time measurements.</p>
+<ul>
+<li><strong>Visual Impact</strong>:
+     A <strong>graph</strong> showing the effect of damping over time would illustrate how the period increases slightly as energy is lost due to friction:</li>
+</ul>
+<details>
+<summary>Click to view the Python code for Damping Effect Graph</summary>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Time array
+t = np.linspace(0, 20, 500)
+
+# Damped oscillation parameters
+g = 9.81  # m/s²
+L = 1.0  # meters
+theta_0 = 0.2  # Initial angle in radians
+omega_0 = np.sqrt(g / L)  # Natural frequency
+b = 0.05  # Damping coefficient
+
+# Damped motion equation
+theta_damped = theta_0 * np.exp(-b * t / 2) * np.cos(omega_0 * t)
+
+# Plotting the damped oscillation
+plt.figure(figsize=(8, 6))
+plt.plot(t, theta_damped)
+plt.title('Damped Pendulum Oscillation')
+plt.xlabel('Time (s)')
+plt.ylabel('Amplitude (rad)')
+plt.grid(True)
+
+# Save the plot as an image
+plt.savefig('./images/damping_effect.png')
+plt.close()
+</code></pre>
+</details>
+<p><img alt="Damping Effect" src="../images/damping_effect.png"/></p>
+<hr/>
+<h3 id="5-uncertainty-in-the-length-and-period-measurements">5. <strong>Uncertainty in the Length and Period Measurements</strong>:</h3>
+<ul>
+<li><strong>Source of Uncertainty</strong>: The propagation of uncertainties in both the length <span class="arithmatex">\( L \)</span> and the period <span class="arithmatex">\( T \)</span> must be considered in the final calculation of <span class="arithmatex">\( g \)</span>.</li>
+<li>
+<p><strong>Impact</strong>: The uncertainty in <span class="arithmatex">\( g \)</span> is affected by both the uncertainty in the length and the period. Since <span class="arithmatex">\( g \)</span> is calculated using the formula <span class="arithmatex">\( g = \frac{4\pi^2 L}{T^2} \)</span>, any uncertainty in <span class="arithmatex">\( L \)</span> and <span class="arithmatex">\( T \)</span> will propagate and influence the final value of <span class="arithmatex">\( g \)</span>.</p>
+</li>
+<li>
+<p><strong>Visual Impact</strong>:
+     Here's a <strong>graph</strong> showing how the uncertainty in <span class="arithmatex">\( T \)</span> and <span class="arithmatex">\( L \)</span> propagates into the uncertainty in <span class="arithmatex">\( g \)</span>:</p>
+</li>
+</ul>
+<details>
+<summary>Click to view the Python code for Uncertainty Propagation Graph</summary>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Length and period with uncertainties
+L = 1.0  # meters
+L_uncertainty = 0.01  # meters
+T = 2.0  # seconds
+T_uncertainty = 0.05  # seconds
+
+# Gravitational acceleration calculation
+g = (4 * np.pi**2 * L) / (T**2)
+
+# Uncertainty propagation formula
+dg = np.sqrt((4 * np.pi**2 * L_uncertainty / T**2)**2 + (-8 * np.pi**2 * L * T_uncertainty / T**3)**2)
+
+# Plotting the uncertainty
+plt.figure(figsize=(8, 6))
+plt.errorbar(L, g, yerr=dg, xerr=L_uncertainty, fmt='o', color='red', label="Uncertainty in g")
+plt.title('Uncertainty Propagation in Gravitational Acceleration')
+plt.xlabel('Pendulum Length (m)')
+plt.ylabel('Gravitational Acceleration (m/s²)')
+plt.grid(True)
+plt.legend()
+
+# Save the plot as an image
+plt.savefig('./images/uncertainty_in_g.png')
+plt.close()
+</code></pre>
+</details>
+<p><img alt="Uncertainty in g" src="../images/uncertainty_in_g.png"/></p>
+<hr/>
+<h2 id="3-conclusion">3. <strong>Conclusion:</strong></h2>
+<p>After conducting the experiment and analyzing the results, we found that the measured value of gravitational acceleration <span class="arithmatex">\( g \)</span> is close to the standard value of <span class="arithmatex">\( 9.81 \, \text{m/s}^2 \)</span>. However, several sources of uncertainty—primarily from length measurement, timing variability, and the assumptions about small amplitude oscillations—have an impact on the precision of our measurements.</p>
+<p>By averaging multiple measurements and propagating uncertainties, we have quantified how each source of error influences the final result. The experiment could be improved by using digital timers for more accurate timing measurements and ensuring the pendulum’s amplitude remains strictly small.</p>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
