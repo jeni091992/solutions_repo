@@ -84,6 +84,20 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#exploring-the-central-limit-theorem-through-simulations">Exploring the Central Limit Theorem through Simulations</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-motivation-and-exploration-of-applications">1. Motivation and Exploration of Applications</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-python-simulation-with-visualizations">2. Python Simulation with Visualizations</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-visualizations">3. Visualizations</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#4-discussion-on-practical-systems">4. Discussion on Practical Systems</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
@@ -171,7 +185,110 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h2 id="problem-1">Problem 1</h2>
+<h3 id="exploring-the-central-limit-theorem-through-simulations">Exploring the Central Limit Theorem through Simulations</h3>
+<h4 id="1-motivation-and-exploration-of-applications">1. Motivation and Exploration of Applications</h4>
+<p>The <strong>Central Limit Theorem (CLT)</strong> is one of the most important principles in probability and statistics. It states that the sampling distribution of the sample mean will approach a normal distribution as the sample size increases, regardless of the original distribution of the population. </p>
+<p><strong>Applications of CLT:</strong></p>
+<ul>
+<li><strong>Estimating Population Parameters</strong>: CLT allows us to estimate the population mean by sampling from the population, even if we don't know the population's distribution.</li>
+<li><strong>Quality Control in Manufacturing</strong>: The CLT is used to monitor the quality of products by sampling from a production line and making inferences about the entire batch.</li>
+<li><strong>Financial Models</strong>: In finance, the CLT is used to estimate average returns and risk across large portfolios.</li>
+<li><strong>Medical Research</strong>: CLT is applied in clinical trials and other research where population data is unavailable but sample data is abundant.</li>
+</ul>
+<hr/>
+<h4 id="2-python-simulation-with-visualizations">2. Python Simulation with Visualizations</h4>
+<p>In this simulation, we will generate different types of population distributions (Uniform, Exponential, and Binomial), sample from these populations, and observe how the sample mean distribution converges to a normal distribution as the sample size increases. We will also explore how the population variance and sample size impact this convergence.</p>
+<details>
+<summary>Click to expand Python code</summary>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Parameters for the simulation
+population_size = 1000000  # Large population size for each distribution
+
+# Uniform distribution
+uniform_population = np.random.uniform(0, 1, population_size)
+
+# Exponential distribution
+exponential_population = np.random.exponential(1, population_size)
+
+# Binomial distribution
+binomial_population = np.random.binomial(10, 0.5, population_size)
+
+# Function to generate sample means for various sample sizes
+def sample_means(population, sample_sizes, n_samples=10000):
+    means_dict = {}
+    for size in sample_sizes:
+        sample_means = []
+        for _ in range(n_samples):
+            sample = np.random.choice(population, size=size, replace=False)
+            sample_means.append(np.mean(sample))
+        means_dict[size] = sample_means
+    return means_dict
+
+# Sample sizes to explore
+sample_sizes = [5, 10, 30, 50]
+
+# Get sample means for each distribution
+uniform_sample_means = sample_means(uniform_population, sample_sizes)
+exponential_sample_means = sample_means(exponential_population, sample_sizes)
+binomial_sample_means = sample_means(binomial_population, sample_sizes)
+</code></pre>
+</details>
+<hr/>
+<h4 id="3-visualizations">3. Visualizations</h4>
+<p>The following visualizations are generated based on the simulation of the sampling distributions:</p>
+<ol>
+<li>
+<p><strong>Uniform Distribution Sampling Means:</strong></p>
+<ul>
+<li><strong>Graph Title:</strong> Uniform Distribution Sample Means for Varying Sample Sizes.</li>
+<li>The sampling distribution of the sample means approaches normality as the sample size increases.</li>
+</ul>
+<p>Example:</p>
+<p><img alt="Uniform Distribution" src="../images/Uniform_sample_size_50.png"/></p>
+</li>
+<li>
+<p><strong>Exponential Distribution Sampling Means:</strong></p>
+<ul>
+<li><strong>Graph Title:</strong> Exponential Distribution Sample Means for Varying Sample Sizes.</li>
+<li>Even though the population is skewed, the sampling distribution of the sample means becomes more normal as the sample size increases.</li>
+</ul>
+<p>Example:</p>
+<p><img alt="Exponential Distribution" src="../images/Exponential_sample_size_50.png"/></p>
+</li>
+<li>
+<p><strong>Binomial Distribution Sampling Means:</strong></p>
+<ul>
+<li><strong>Graph Title:</strong> Binomial Distribution Sample Means for Varying Sample Sizes.</li>
+<li>The binomial distribution shows convergence to normality with an increase in sample size.</li>
+</ul>
+<p>Example:</p>
+<p><img alt="Binomial Distribution" src="../images/Binomial_sample_size_50.png"/></p>
+</li>
+</ol>
+<hr/>
+<h4 id="4-discussion-on-practical-systems">4. Discussion on Practical Systems</h4>
+<ul>
+<li>
+<p><strong>Estimating Population Parameters:</strong>
+  The CLT allows for estimating the population mean from a sample, which is particularly useful when working with large datasets where the population is not easily accessible.</p>
+</li>
+<li>
+<p><strong>Quality Control in Manufacturing:</strong>
+  By applying the CLT, manufacturers can use sample data to monitor quality, detect problems in the production process, and ensure consistency.</p>
+</li>
+<li>
+<p><strong>Financial Applications:</strong>
+  In finance, the CLT allows analysts to predict average returns and risk in portfolios. It enables the use of normal distributions to estimate probabilities and make decisions based on sample data.</p>
+</li>
+</ul>
+<hr/>
+<h3 id="conclusion">Conclusion</h3>
+<p>This simulation demonstrates the <strong>Central Limit Theorem</strong> by showing how the sampling distribution of the sample mean converges to a normal distribution as the sample size increases. It highlights the importance of the CLT in various real-world applications, including estimating population parameters, quality control, and financial modeling.</p>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
