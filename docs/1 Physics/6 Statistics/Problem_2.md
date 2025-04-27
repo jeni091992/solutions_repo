@@ -112,13 +112,28 @@ The following animation shows how the points are plotted inside and outside the 
   <summary>Click to expand Python code</summary>
 
 ```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Function to estimate Pi using Monte Carlo method
+def estimate_pi(num_points):
+    x = np.random.uniform(-1, 1, num_points)
+    y = np.random.uniform(-1, 1, num_points)
+
+    inside_circle = (x**2 + y**2 <= 1)
+    pi_estimate = 4 * np.sum(inside_circle) / num_points
+    return pi_estimate
+
+# Sample sizes for the convergence plot
 sample_sizes = [10, 100, 1000, 10000, 100000]
 estimates = []
 
+# Calculate estimates of Pi for each sample size
 for size in sample_sizes:
-    pi_estimate, _, _, _ = estimate_pi(size)
+    pi_estimate = estimate_pi(size)
     estimates.append(pi_estimate)
 
+# Create a convergence plot
 plt.figure(figsize=(8,5))
 plt.plot(sample_sizes, estimates, marker='o', label='Estimated π', color='teal')
 plt.axhline(y=np.pi, color='red', linestyle='--', label='Actual π (Reference)')
@@ -128,10 +143,18 @@ plt.ylabel('Estimated π')
 plt.title('Convergence of π Estimate (Circle Method)', fontsize=14)
 plt.legend()
 plt.grid(True)
-plt.show()
+
+# Save the plot as an image (PNG)
+plt.savefig('./images/convergence_plot.png')  # Save the plot as an image
+plt.close()  # Close the plot to avoid display
+
 ```
 
 </details>
+
+The convergence plot shows how the estimated value of π improves as the number of random points increases. As the sample size grows, the estimate gets closer to the true value of π.
+
+![Convergence of π Estimate](./images/convergence_plot.png)
 
 ---
 
@@ -277,6 +300,10 @@ plt.show()
 ```
 
 </details>
+
+The convergence plot for Buffon’s Needle simulation demonstrates how the estimate of π improves as the number of needle drops increases. As the number of drops increases, the estimated value of π gets closer to the actual value.
+
+![Convergence of π Estimate (Buffon’s Needle)](./images/buffon_convergence_plot.png)
 
 ---
 
