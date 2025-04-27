@@ -278,13 +278,28 @@ estimate_pi(num_points, frames=100)
 <h2 id="14-analysis-convergence-plot">1.4 Analysis (Convergence Plot)</h2>
 <details>
 <summary>Click to expand Python code</summary>
-<pre><code class="language-python">sample_sizes = [10, 100, 1000, 10000, 100000]
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Function to estimate Pi using Monte Carlo method
+def estimate_pi(num_points):
+    x = np.random.uniform(-1, 1, num_points)
+    y = np.random.uniform(-1, 1, num_points)
+
+    inside_circle = (x**2 + y**2 &lt;= 1)
+    pi_estimate = 4 * np.sum(inside_circle) / num_points
+    return pi_estimate
+
+# Sample sizes for the convergence plot
+sample_sizes = [10, 100, 1000, 10000, 100000]
 estimates = []
 
+# Calculate estimates of Pi for each sample size
 for size in sample_sizes:
-    pi_estimate, _, _, _ = estimate_pi(size)
+    pi_estimate = estimate_pi(size)
     estimates.append(pi_estimate)
 
+# Create a convergence plot
 plt.figure(figsize=(8,5))
 plt.plot(sample_sizes, estimates, marker='o', label='Estimated π', color='teal')
 plt.axhline(y=np.pi, color='red', linestyle='--', label='Actual π (Reference)')
@@ -294,9 +309,15 @@ plt.ylabel('Estimated π')
 plt.title('Convergence of π Estimate (Circle Method)', fontsize=14)
 plt.legend()
 plt.grid(True)
-plt.show()
+
+# Save the plot as an image (PNG)
+plt.savefig('./images/convergence_plot.png')  # Save the plot as an image
+plt.close()  # Close the plot to avoid display
+
 </code></pre>
 </details>
+<p>The convergence plot shows how the estimated value of π improves as the number of random points increases. As the sample size grows, the estimate gets closer to the true value of π.</p>
+<p><img alt="Convergence of π Estimate" src="../images/convergence_plot.png"/></p>
 <hr/>
 <h3 id="output-of-the-convergence-plot">Output of the Convergence Plot</h3>
 <p>The <strong>convergence plot</strong> visually shows how the estimated value of π approaches the true value as the number of points sampled increases. Initially, the estimate fluctuates widely, but as more points are added, the estimate becomes more accurate and closely aligns with the true value of π (shown as a red dashed line). </p>
@@ -414,6 +435,8 @@ plt.grid(True)
 plt.show()
 </code></pre>
 </details>
+<p>The convergence plot for Buffon’s Needle simulation demonstrates how the estimate of π improves as the number of needle drops increases. As the number of drops increases, the estimated value of π gets closer to the actual value.</p>
+<p><img alt="Convergence of π Estimate (Buffon’s Needle)" src="../images/buffon_convergence_plot.png"/></p>
 <hr/>
 <h1 id="conclusion">Conclusion</h1>
 <table>
