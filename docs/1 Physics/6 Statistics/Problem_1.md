@@ -70,25 +70,34 @@ The following visualizations are generated based on the simulation of the sampli
     - **Graph Title:** Uniform Distribution Sample Means for Varying Sample Sizes.
     - The sampling distribution of the sample means approaches normality as the sample size increases.
 
-    Example:
+    Examples:
 
-    ![Uniform Distribution](./images/Uniform_sample_size_50.png)
+    ![Uniform Distribution - Sample Size 5](./images/Uniform_sample_size_5.png)
+    ![Uniform Distribution - Sample Size 10](./images/Uniform_sample_size_10.png)
+    ![Uniform Distribution - Sample Size 30](./images/Uniform_sample_size_30.png)
+    ![Uniform Distribution - Sample Size 50](./images/Uniform_sample_size_50.png)
 
 2. **Exponential Distribution Sampling Means:**
     - **Graph Title:** Exponential Distribution Sample Means for Varying Sample Sizes.
     - Even though the population is skewed, the sampling distribution of the sample means becomes more normal as the sample size increases.
 
-    Example:
+    Examples:
 
-    ![Exponential Distribution](./images/Exponential_sample_size_50.png)
+    ![Exponential Distribution - Sample Size 5](./images/Exponential_sample_size_5.png)
+    ![Exponential Distribution - Sample Size 10](./images/Exponential_sample_size_10.png)
+    ![Exponential Distribution - Sample Size 30](./images/Exponential_sample_size_30.png)
+    ![Exponential Distribution - Sample Size 50](./images/Exponential_sample_size_50.png)
 
 3. **Binomial Distribution Sampling Means:**
     - **Graph Title:** Binomial Distribution Sample Means for Varying Sample Sizes.
     - The binomial distribution shows convergence to normality with an increase in sample size.
 
-    Example:
+    Examples:
 
-    ![Binomial Distribution](./images/Binomial_sample_size_50.png)
+    ![Binomial Distribution - Sample Size 5](./images/Binomial_sample_size_5.png)
+    ![Binomial Distribution - Sample Size 10](./images/Binomial_sample_size_10.png)
+    ![Binomial Distribution - Sample Size 30](./images/Binomial_sample_size_30.png)
+    ![Binomial Distribution - Sample Size 50](./images/Binomial_sample_size_50.png)
 
 ---
 
@@ -110,3 +119,4 @@ The following visualizations are generated based on the simulation of the sampli
 This simulation demonstrates the **Central Limit Theorem** by showing how the sampling distribution of the sample mean converges to a normal distribution as the sample size increases. It highlights the importance of the CLT in various real-world applications, including estimating population parameters, quality control, and financial modeling.
 
 ---
+
