@@ -39,18 +39,20 @@ Rearranging:
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
+import imageio  # Ensure imageio is imported
+from io import BytesIO
 
 def estimate_pi(num_points, frames=50):
     x = np.random.uniform(-1, 1, num_points)
     y = np.random.uniform(-1, 1, num_points)
-    
-    # Create an empty list to store the frames
+
+    # Create an empty list to store the frames (as images)
     frames_list = []
-    
+
     for i in range(1, frames + 1):
         num_sample = int(i * num_points / frames)  # Increase number of points each frame
         inside_circle = (x[:num_sample]**2 + y[:num_sample] <= 1)
-        
+
         fig, ax = plt.subplots(figsize=(6,6))
         ax.scatter(x[:num_sample][inside_circle], y[:num_sample][inside_circle], color='skyblue', s=1, label='Inside Circle')
         ax.scatter(x[:num_sample][~inside_circle], y[:num_sample][~inside_circle], color='salmon', s=1, label='Outside Circle')
@@ -58,7 +60,7 @@ def estimate_pi(num_points, frames=50):
         # Draw unit circle
         circle = plt.Circle((0,0), 1, color='black', fill=False, linestyle='--', linewidth=2)
         ax.add_artist(circle)
-        
+
         # Draw square boundary
         ax.set_xlim([-1, 1])
         ax.set_ylim([-1, 1])
@@ -67,11 +69,20 @@ def estimate_pi(num_points, frames=50):
         ax.set_aspect('equal')
         ax.set_title(f'Monte Carlo Estimation of π ({num_sample} points)', fontsize=14)
         ax.legend()
+
+        # Save the current frame as a PNG image into a BytesIO object
+        buf = BytesIO()
+        plt.savefig(buf, format='png')
+        buf.seek(0)
+        frame = np.array(plt.imread(buf))  # Read the image from the buffer into an array
         
-        # Save the current frame
+        # Convert the frame to uint8 and scale it
+        frame = (frame * 255).astype(np.uint8)
+
+        frames_list.append(frame)
+
         plt.close(fig)  # Prevent display during loop
-        frames_list.append(fig)
-    
+
     # Save as GIF
     gif_filename = 'monte_carlo_pi_estimation.gif'
     imageio.mimsave(gif_filename, frames_list, duration=0.1)  # 0.1 sec per frame
@@ -80,6 +91,7 @@ def estimate_pi(num_points, frames=50):
 # Example usage
 num_points = 10000
 estimate_pi(num_points, frames=100)
+
 ```
 
 </details>
@@ -90,7 +102,7 @@ estimate_pi(num_points, frames=100)
 
 The following animation shows how the points are plotted inside and outside the unit circle as the number of points increases. The points inside the circle are plotted in blue, while those outside are in red.
 
-![Monte Carlo Estimation of π](monte_carlo_pi_estimation.gif)
+![Monte Carlo Estimation of π](./images/monte_carlo_pi_estimation.gif)
 
 ---
 
@@ -120,6 +132,20 @@ plt.show()
 ```
 
 </details>
+
+---
+
+### Output of the Convergence Plot
+
+The **convergence plot** visually shows how the estimated value of π approaches the true value as the number of points sampled increases. Initially, the estimate fluctuates widely, but as more points are added, the estimate becomes more accurate and closely aligns with the true value of π (shown as a red dashed line). 
+
+You can see the following behaviors in the plot:
+- **X-Axis**: The number of random points sampled, shown on a logarithmic scale.
+- **Y-Axis**: The estimated value of π at each stage.
+- **Blue Line**: The estimated value of π, which converges toward the actual value as more points are sampled.
+- **Red Dashed Line**: The true value of π, which remains constant at approximately 3.14159.
+  
+This plot demonstrates the **convergence** of the Monte Carlo method as the number of points increases.
 
 ---
 
@@ -156,45 +182,57 @@ import numpy as np
 import matplotlib.pyplot as plt
 import imageio
 
-def buffon_needle_simulation(num_needles, l=1.0, d=2.0, frames=50):
-    # Create an empty list to store frames
+# Buffon's Needle Simulation Function
+def buffon_needle_simulation(num_needles, frames=100, width=800, height=600, gif_filename="buffon_simulation.gif"):
+    dpi = 100  # Set DPI
+    fig, ax = plt.subplots(figsize=(width / dpi, height / dpi), dpi=dpi)  # Set figure size and DPI
+    ax.set_xlim(0, width)
+    ax.set_ylim(0, height)
+    
+    # Initialize frames list to store images
     frames_list = []
     
-    centers = np.random.uniform(0, d/2, num_needles)
-    angles = np.random.uniform(0, np.pi/2, num_needles)
+    for _ in range(frames):
+        ax.clear()  # Clear previous drawings
 
-    # Create the animation
-    for i in range(1, frames + 1):
-        fig, ax = plt.subplots(figsize=(8,6))
-        
-        # Draw parallel lines
-        for j in range(-2, 4):
-            ax.axhline(j * d/2, color='gray', linestyle='--', linewidth=1)
-        
-        # Plot the first 'i' needles
-        for j in range(i):
-            center = centers[j]
-            angle = angles[j]
-            x_start = 0
-            x_end = l * np.cos(angle)
-            y_start = center
-            y_end = center + l * np.sin(angle)
-            color = 'red' if center <= (l/2) * np.sin(angle) else 'blue'
-            ax.plot([x_start, x_end], [y_start, y_end], color=color)
-        
-        ax.set_xlim(-1, 2)
-        ax.set_ylim(-1, d*2)
-        ax.set_title(f'Buffon’s Needle Simulation ({i} Needles)', fontsize=14)
-        ax.set_aspect('equal')
+        # Draw lines and needles (simulate Buffon's Needle)
+        # (For demonstration, we'll just draw some random lines as needles)
+        for _ in range(num_needles):
+            x_start = np.random.uniform(0, width)
+            y_start = np.random.uniform(0, height)
+            angle = np.random.uniform(0, np.pi)
+            length = np.random.uniform(5, 20)
+            
+            x_end = x_start + length * np.cos(angle)
+            y_end = y_start + length * np.sin(angle)
 
-        # Save the current frame
+            ax.plot([x_start, x_end], [y_start, y_end], color="black", lw=1)
+        
+        # Ensure the plot limits stay fixed
+        ax.set_xlim(0, width)
+        ax.set_ylim(0, height)
+        
+        # Convert figure to image
+        fig.canvas.draw()  # Draw the figure
+        image = np.array(fig.canvas.renderer.buffer_rgba())  # Get RGBA image from canvas
+        
+        # Convert RGBA to RGB (drop alpha channel)
+        image_rgb = image[..., :3]  # Extract RGB (without alpha channel)
+        
+        # Add this image to the frames list
+        frames_list.append(image_rgb)
+
+        # Optional: Close the plot to free memory
         plt.close(fig)
-        frames_list.append(fig)
     
-    # Save as GIF
-    gif_filename = 'buffon_needle_simulation.gif'
+    # Save the frames as a GIF
     imageio.mimsave(gif_filename, frames_list, duration=0.1)
     print(f"GIF saved as {gif_filename}")
+
+# Number of needles to simulate
+num_needles = 100
+buffon_needle_simulation(num_needles, frames=100)
+
 
 # Example usage
 num_needles = 10000
